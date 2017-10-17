@@ -10,14 +10,14 @@ module.exports = function(grunt) {
           compress: true,
         },
         files: {
-          'build/static/app.js': ['js/**/*.js']
-        }
-      }
+          'build/static/app.js': ['js/jquery-3.2.1.min.js', 'js/**/*.js'],
+        },
+      },
     },
     less: {
       dist: {
         files: {
-          'build/static/app.css': ['css/**/*.css']
+          'build/static/app.css': ['css/**/*.css'],
         }
       }
     },
@@ -27,16 +27,16 @@ module.exports = function(grunt) {
           removeComments: true,
           collapseWhitespace: true,
           minifyURLs: true,
-          minifyJS: true
+          minifyJS: true,
         },
         files: [
           {
             expand: true,
             src: ['views/**/*.hbs'],
-            dest: 'build'
-          }
-        ]
-      }
+            dest: 'build',
+          },
+        ],
+      },
     },
     copy: {
       dist: {
@@ -44,31 +44,31 @@ module.exports = function(grunt) {
           {
             expand: true,
             src: ['fonts/**/*', 'img/**/*'],
-            dest: 'build/static'
-          }
-        ]
-      }
+            dest: 'build/static',
+          },
+        ],
+      },
     },
     watch: {
       options: {
         livereload: true,
-        nospawn: true
+        nospawn: true,
       },
       js: {
         files: ['js/**/*.js'],
-        tasks: 'uglify'
+        tasks: 'uglify',
       },
       less: {
         files: ['less/**/*.less'],
-        tasks: 'less'
+        tasks: 'less',
       },
       html: {
         files: ['views/**/*.hbs'],
-        tasks: 'htmlmin'
+        tasks: 'htmlmin',
       },
       files: {
         files: ['fonts/**/*', 'img/**/*'],
-        tasks: 'copy'
+        tasks: 'copy',
       },
       babel: {
         files: 'src/**/*.js',

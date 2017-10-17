@@ -93,6 +93,8 @@ app.post('/contact', (req, res) => {
   }
 });
 
+app.use('/', express.static(path.join(__dirname, 'static')));
+
 if (isProduction) {
   // must be last
   app.use(Raven.errorHandler());
