@@ -4,8 +4,25 @@
         <br>
         {{> header }}
 
-        {{> lang }}
-        {{> tequila }}
+        {{# if user}}
+
+            {{> lang }}
+
+            {{# if joining}}
+
+                {{> joining }}
+
+            {{else}}
+
+                {{> pending }}
+
+            {{/if}}
+
+        {{else}}
+
+            {{> tequila }}
+
+        {{/if}}
 
         {{> footer }}
         <br>

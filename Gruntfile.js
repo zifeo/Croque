@@ -28,6 +28,7 @@ module.exports = function(grunt) {
           collapseWhitespace: true,
           minifyURLs: true,
           minifyJS: true,
+          ignoreCustomFragments: [/{{[\s\S]*?}}/],
         },
         files: [
           {
@@ -59,7 +60,7 @@ module.exports = function(grunt) {
         tasks: 'uglify',
       },
       less: {
-        files: ['less/**/*.less'],
+        files: ['css/**/*.css'],
         tasks: 'less',
       },
       html: {

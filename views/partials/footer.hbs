@@ -21,4 +21,7 @@
 
 <p>
     Ask questions and give feedback directly on <a href="">Facebook</a>.
+    {{# if user}}
+        <br> Connected as {{ user.firstname }}, <a href="sober">logout</a>.
+    {{/if}}
 </p>

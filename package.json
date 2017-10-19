@@ -43,8 +43,13 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
     "helmet": "^3.9.0",
+    "lowdb": "^1.0.0",
+    "moment": "^2.19.1",
     "nodemailer": "^4.2.0",
+    "passport": "^0.4.0",
+    "passport-tequila": "^0.1.12",
     "raven": "^2.2.1",
     "winston": "^2.4.0"
   }

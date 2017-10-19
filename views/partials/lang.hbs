@@ -1,22 +1,22 @@
-<div class="ui form">
+<br>
+<div class="ui center aligned grid form">
     <div class="inline fields">
-        <label for="lang">I speak</label>
         <div class="field">
             <div class="ui radio checkbox">
-                <input type="radio" name="lang" class="hidden">
-                <label>French</label>
+                <input type="radio" name="lang" class="hidden" {{ lang 'fr' }}>
+                <label class="lang selector" rel="fr">French</label>
             </div>
         </div>
         <div class="field">
             <div class="ui radio checkbox">
-                <input type="radio" name="lang" class="hidden">
-                <label>English</label>
+                <input type="radio" name="lang" class="hidden" {{ lang 'en'}}>
+                <label class="lang selector" rel="en">English</label>
             </div>
         </div>
         <div class="field">
             <div class="ui radio checkbox">
-                <input type="radio" name="lang" class="hidden">
-                <label>Both</label>
+                <input type="radio" name="lang" class="hidden" {{ lang 'both' }}>
+                <label class="lang selector" rel="both">Both</label>
             </div>
         </div>
     </div>
