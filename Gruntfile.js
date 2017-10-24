@@ -78,10 +78,17 @@ module.exports = function(grunt) {
     },
     clean: ['build'],
     babel: {
+      options: {
+        sourceMap: true,
+      },
       build: {
-        files: {
-          'build/app.js': 'src/index.js',
-        },
+        files: [{
+          expand: true,
+          cwd: 'src',
+          src: ['**/*.js'],
+          dest: 'build',
+          ext: '.js'
+        }],
       },
     },
     express: {

@@ -28,6 +28,7 @@
         "bracketSpacing": true,
         "jsxBracketSameLine": true
       }
-    ]
+    ],
+    "import/prefer-default-export": "off"
   }
 }

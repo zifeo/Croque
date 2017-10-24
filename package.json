@@ -45,6 +45,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "helmet": "^3.9.0",
+    "lodash": "^4.17.4",
     "lowdb": "^1.0.0",
     "moment-timezone": "^0.5.13",
     "nodemailer": "^4.3.0",
