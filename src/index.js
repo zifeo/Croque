@@ -17,10 +17,12 @@ import tequilaPassport from 'passport-tequila';
 import expressSession from 'express-session';
 import low from 'lowdb';
 import FileAsync from 'lowdb/adapters/FileAsync';
-import moment from 'moment';
+import moment from 'moment-timezone';
+
+const tz = "Europe/Zurich"
 
 function computeNextNoon() {
-  let nextNoon = moment();
+  let nextNoon = moment.tz(tz);
   if (nextNoon.isoWeekday() === 6) {
     nextNoon = nextNoon.add(2, 'd');
   } else if (nextNoon.isoWeekday() === 7) {
@@ -75,7 +77,7 @@ low(new FileAsync('db.json')).then(db => {
         name,
         uniqueid,
         email,
-        lastSeen: moment().toISOString(),
+        lastSeen: moment.tz(tz).toISOString(),
       })
       .write()
       .then(() => done(null, uniqueid), err => done(err, uniqueid));
