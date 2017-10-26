@@ -5,7 +5,9 @@
   "scripts": {
     "start": "grunt --",
     "lint": "eslint --fix \"./{src,test}/**/*.js\"",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "test": "mocha --timeout 8000 --recursive --require babel-register",
+    "testOnly": "mocha --timeout 8000 --require babel-register"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
@@ -13,6 +15,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-1": "^6.24.1",
     "babelify": "7.3.0",
+    "chai": "^4.1.2",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-config-prettier": "^2.6.0",
@@ -34,6 +37,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-express-server": "^0.5.3",
     "load-grunt-tasks": "^3.5.2",
+    "mocha": "^4.0.1",
     "prettier": "^1.7.4"
   },
   "dependencies": {
