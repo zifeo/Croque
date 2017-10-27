@@ -6,6 +6,15 @@ import config from './config';
 
 type Id = string;
 type Noon = Date;
+type User = {
+  lang: 'fr' | 'en' | 'both',
+  slug: string,
+  firstname: string,
+  name: string,
+  uniqueid: string,
+  email: string,
+  lastSeen: string,
+};
 
 function injectOps(db: Object): Object {
   /* eslint-disable no-param-reassign */
@@ -48,3 +57,4 @@ function lowdbFactory(): Promise<Object> {
 }
 
 export default lowdbFactory;
+export type { User };
