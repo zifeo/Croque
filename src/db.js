@@ -21,6 +21,9 @@ function injectOps(db: Object): Object {
 
   db.getUser = async (uniqueid: Id): Promise<Object> => db.get(['users', uniqueid]).value();
 
+  db.getUsers = async (uniqueids: Array<Id>): Promise<Array<Object>> =>
+    uniqueids.map(uniqueid => db.get(['users', uniqueid]).value());
+
   db.updateUser = async (uniqueid: Id, values: Object): Promise<void> => {
     const oldValues = await db.getUser(uniqueid);
     return db

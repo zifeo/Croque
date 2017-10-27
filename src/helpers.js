@@ -7,6 +7,15 @@ import assert from 'assert';
 import config from './config';
 import type { User } from './db';
 
+function computeNoon() {
+  return moment
+    .tz(config.tz)
+    .hours(12)
+    .minutes(15)
+    .seconds(0)
+    .milliseconds(0);
+}
+
 function computeNextNoon() {
   // returns next noon by skipping weekend
   let nextNoon = moment.tz(config.tz);
@@ -117,4 +126,4 @@ function matchMaking(users: Array<User>) {
   ];
 }
 
-export { computeNextNoon, matchMaking, randomFactory, group3or4or5, decompose3or4 };
+export { computeNoon, computeNextNoon, matchMaking, randomFactory, group3or4or5, decompose3or4 };
