@@ -1,0 +1,25 @@
+version: '3'
+
+networks:
+  front:
+    external:
+      name: front
+
+volumes:
+  croque-data:
+
+services:
+
+  croque:
+    build: .
+    restart: unless-stopped
+    networks:
+      - front
+      - default
+    volumes:
+      - croque-data:/data/db.json
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:croque.epfl.life
+      - traefik.port=443
+      - traefik.docker.network=front
