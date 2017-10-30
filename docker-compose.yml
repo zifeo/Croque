@@ -17,7 +17,7 @@ services:
       - front
       - default
     volumes:
-      - croque-data:/data/db.json
+      - croque-data:/data/db
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:croque.epfl.life

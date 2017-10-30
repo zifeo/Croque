@@ -5,6 +5,7 @@ WORKDIR /data
 
 COPY node_modules /data/node_modules
 COPY build /data
+COPY db /data
 ENV NODE_ENV production
 
 EXPOSE 9000
