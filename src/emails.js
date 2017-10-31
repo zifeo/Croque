@@ -18,7 +18,7 @@ const sadEmail = (firstName: string): string =>
   `Hey ${firstName},
 
 Sorry we weren't able the find enough people for next lunch.
-Help us to spread the words and be sure this doesn't happen again!
+Help us to spread the word and be sure this doesn't happen again!
 
 Bon appétit and see you next lunch!
 
