@@ -53,6 +53,12 @@ describe('Match making', () => {
       should.not.exist(group3or4or5([], [1, 2]));
     });
 
+    it('should find optimal groups', async () => {
+      // FIX by using sat solver
+      // decompose3or4([1, 2, 3], [4]).should.deep.equal([[1, 2, 3, 4], []]);
+      // decompose3or4([1, 2, 3], [4, 5]).should.deep.equal([[1, 2, 3, 4, 5], []]);
+    });
+
     it('should find groups without additional', async () => {
       for (let n = 3; n < 1000; n += 1) {
         const elems = _.range(n);
