@@ -19,17 +19,17 @@ function computeNoon() {
 function computeNextNoon() {
   // returns next noon by skipping weekend
   let nextNoon = moment.tz(config.tz);
-  if (nextNoon.isoWeekday() === 6) {
-    nextNoon = nextNoon.add(2, 'd');
-  } else if (nextNoon.isoWeekday() === 7) {
-    nextNoon = nextNoon.add(1, 'd');
-  }
   if (nextNoon.hours() >= 12) {
     if (nextNoon.isoWeekday() === 5) {
       nextNoon = nextNoon.add(3, 'd');
     } else {
       nextNoon = nextNoon.add(1, 'd');
     }
+  }
+  if (nextNoon.isoWeekday() === 6) {
+    nextNoon = nextNoon.add(2, 'd');
+  } else if (nextNoon.isoWeekday() === 7) {
+    nextNoon = nextNoon.add(1, 'd');
   }
   return nextNoon
     .hours(12)
