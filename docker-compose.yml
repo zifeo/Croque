@@ -18,6 +18,12 @@ services:
       - default
     volumes:
       - croque-data:/data/db
+    environment:
+      - NODE_ENV
+      - CROQUE_SALT
+      - CROQUE_MAIL_FROM
+      - CROQUE_MAIL_HOST
+      - CROQUE_MAIL_PORT
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:croque.epfl.life
