@@ -20,10 +20,11 @@ services:
       - croque-data:/data/db
     environment:
       - NODE_ENV
-      - CROQUE_SALT
+      - CROQUE_SECRET
       - CROQUE_MAIL_FROM
       - CROQUE_MAIL_HOST
       - CROQUE_MAIL_PORT
+      - CROQUE_RAVEN
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:croque.epfl.life
