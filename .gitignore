@@ -3,4 +3,5 @@ db.json
 node_modules
 build
 .idea
+*.log
 
