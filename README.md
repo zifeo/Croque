@@ -11,6 +11,8 @@ The concept works the following. Every EPFL member can register for next weekday
 ## Getting started
 
 ```shell
+cp .env.example .env
+vim .env
 yarn
 yarn start dev
 ```
