@@ -12,6 +12,8 @@ Please go ${location.details} ${location.plan} and look for the others on time :
 Bon appétit and have fun!
 
 Croque
+
+PS: We are happy to hear your feedback, just reply to this email!
   `;
 
 const sadEmail = (firstName: string): string =>
@@ -20,7 +22,7 @@ const sadEmail = (firstName: string): string =>
 Sorry we weren't able the find enough people for next lunch.
 Help us to spread the word and be sure this doesn't happen again!
 
-Bon appétit and see you next lunch!
+Bon appétit and see you at next lunch!
 
 Croque
   `;

@@ -25,6 +25,7 @@ const config = {
   nodemailer: {
     mail: {
       from: process.env.CROQUE_MAIL_FROM,
+      replyTo: process.env.CROQUE_MAIL_REPLY_TO,
     },
     pool: {
       pool: true,
