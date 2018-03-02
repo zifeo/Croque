@@ -21,6 +21,7 @@ services:
     environment:
       - NODE_ENV
       - CROQUE_SECRET
+      - CROQUE_MAIL_REPLY_TO
       - CROQUE_MAIL_FROM
       - CROQUE_MAIL_HOST
       - CROQUE_MAIL_PORT
