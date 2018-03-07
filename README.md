@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/zifeo/Croque.svg?branch=master)](https://travis-ci.org/zifeo/Croque)
 
-EPFL is a great place. Croque is an [Agepoly](https://agepoly.ch/) and [Musical](http://musical.epfl.ch/) initiative to take friendliness on the campus to the next level. Whether you don't like to eat alone, you want to meet new buddies, you're curious about people elsewhere or you're a chatty person, let's have fun and lunch together 😎 !
+EPFL is a great place. Croque is an [Agepoly](https://agepoly.ch/) and [Musical](http://musical.epfl.ch/) initiative to bring up more friendly, unexpected and surprising encounters on the campus. Whether you don't like to eat alone, you want to meet new buddies, you're curious about people elsewhere or you're a chatty person, let's have fun and lunch together 😎 !
 
 ## Concept
 
