@@ -3,6 +3,6 @@ body {
 
 }
 
-.big.button, .big.button:hover {
+.big.button .visible.content {
     line-height: 150% !important;
 }
