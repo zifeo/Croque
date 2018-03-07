@@ -3,7 +3,6 @@ body {
 
 }
 
-.big.button {
+.big.button, .big.button:hover {
     line-height: 150% !important;
-    background: red!important;
 }
