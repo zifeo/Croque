@@ -2,11 +2,14 @@
 
 [![Build Status](https://travis-ci.org/zifeo/Croque.svg?branch=master)](https://travis-ci.org/zifeo/Croque)
 
-EPFL is a great place. Croque is an initiative to take friendliness on the campus to the next level. Whether you don't like to eat alone, you want to meet new buddies, you're curious about people elsewhere or you're a chatty person, let's have fun and lunch together!
+EPFL is a great place. Croque is an [Agepoly](https://agepoly.ch/) and [Musical](http://musical.epfl.ch/) initiative to take friendliness on the campus to the next level. Whether you don't like to eat alone, you want to meet new buddies, you're curious about people elsewhere or you're a chatty person, let's have fun and lunch together 😎 !
 
-## Lunches
+## Concept
 
-The concept works the following. Every EPFL member can register for next weekday lunch. At 12.00am, joiners will be randomly assigned to groups of 3-4 people and receive an email containing one campus location and first names. They should meet there at 12.15am and decide where to go for lunch. The rest is up to them!
+Every EPFL member can register for next weekday lunch (in french, english or both). At **12.00am**, joiners will be randomly assigned to groups of 3-4 people and **receive an email** containing one campus location and first names. They should meet there at **12.15am** and decide where to go for lunch. The rest is up to them 🎉 !
+(When lacking people, joiners will receive a cancellation, let's retry another day.)
+
+There is a single rule: please show up on time or cancel yourself before the assignment, otherwise you will be banned.
 
 ## Getting started
 
