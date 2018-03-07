@@ -1,5 +1,5 @@
 // @flow
-
+console.log(process.env.CROQUE_SECRET)
 const config = {
   production: process.env.NODE_ENV === 'production',
   port: 9000,

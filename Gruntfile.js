@@ -98,10 +98,15 @@ module.exports = function(grunt) {
         },
       },
     },
+    env: {
+      build: {
+        src: '.env',
+      },
+    },
   });
 
   grunt.registerTask('default', ['clean', 'uglify', 'less', 'htmlmin', 'copy', 'babel']);
-  grunt.registerTask('dev', ['default', 'express', 'watch']);
+  grunt.registerTask('dev', ['default', 'env', 'express', 'watch']);
 
 };
 
