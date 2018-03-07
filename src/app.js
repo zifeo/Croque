@@ -151,7 +151,7 @@ lowdbFactory().then(db => {
     res.locals.user = req.user;
     const nextNoon = computeNextNoon();
     req.nextNoon = nextNoon;
-    res.locals.nextNoon = nextNoon.format('dddd D MMM');
+    res.locals.nextNoon = nextNoon.format('dddd D MMMM');
     res.locals.nextNoonToNow = nextNoon.fromNow();
 
     db.getMiam(nextNoon).then(noon => {
