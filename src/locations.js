@@ -41,7 +41,7 @@ const locations: Array<Location> = [
   {
     id: 'ce-1',
     name: 'CE hall',
-    details: 'near the working table',
+    details: 'near the working tables',
     plan: 'https://plan.epfl.ch/?room=CE194.3',
   },
   {
@@ -59,7 +59,7 @@ const locations: Array<Location> = [
   {
     id: 'co-2',
     name: 'CO hall',
-    details: 'near the double doors',
+    details: 'near the double sliding doors',
     plan: 'https://plan.epfl.ch/?room=CO194.7',
   },
   {
