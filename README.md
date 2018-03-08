@@ -6,8 +6,8 @@ EPFL is a great place. Croque is an [Agepoly](https://agepoly.ch/) and [Musical]
 
 ## Concept
 
-Every EPFL member can register for next weekday lunch (in french, english or both). At **12.00am**, joiners will be randomly assigned to groups of 3-4 people and **receive an email** containing one campus location and first names. They should meet there at **12.15am** and decide where to go for lunch. The rest is up to them 🎉 !
-(When lacking people, joiners will be cancelled by email, let's retry another day.)
+Every EPFL member can register for next weekday lunch (in french, english or both). At **12.00PM**, joiners will be randomly assigned to groups of 3-4 people and **receive an email** containing one campus location and first names. They should meet there at **12.15PM** and decide where to go for lunch. The rest is up to them 🎉 !
+(In case of a lack of people, meetings will be postponed by email.)
 
 There is a single rule: please show up on time or cancel yourself before the assignment, otherwise you will be banned.
 
