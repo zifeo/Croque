@@ -6,7 +6,7 @@ const happyEmail = (firstName: string, others: Array<string>, location: Location
   `Hey ${firstName},
   
 Here is finally your lunch rendez-vous!
-Let's meet ${others.join(', ')} at 12.15am at ${location.name}.
+Let's meet ${others.join(', ')} at 12.10PM at ${location.name}.
 Please go ${location.details} ${location.plan} and look for the others on time :).
 
 Bon appétit and have fun!
