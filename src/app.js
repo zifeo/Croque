@@ -18,11 +18,10 @@ import session from 'cookie-session';
 import moment from 'moment-timezone';
 import _ from 'lodash';
 import Cron from 'cron';
-import { computeNextNoon, computeNoon, findGroups } from './helpers';
-import { happyEmail, sadEmail } from './emails';
-import locations from './locations';
+import { computeNextNoon } from './helpers';
 import lowdbFactory from './db';
 import config from './config';
+import { lunchCron, reminderCron } from './crons';
 
 if (config.production) {
   Raven.config(config.raven, {
@@ -51,59 +50,11 @@ transporter.verify((err, success) => {
 });
 
 lowdbFactory().then(db => {
-  const beat = new Cron.CronJob(
-    '00 00 12 * * 1-5',
-    async () => {
-      winston.info('Beat');
-      const noon = computeNoon();
-      const miam = await db.getMiam(noon);
-      if (!miam) {
-        return;
-      }
+  const lunchBeat = new Cron.CronJob('00 00 12 * * 2,4', lunchCron(db, transporter), null, false, config.tz);
+  lunchBeat.start();
 
-      const { joiners } = miam;
-      const users = await db.getUsers(joiners);
-      const [groupsEn, groupsFr, usersCancelled] = findGroups(users);
-
-      const assignments = groupsEn.concat(groupsFr).map((group, i) => {
-        const location = locations[i % locations.length];
-        winston.info(`assigning group ${i} at ${location.id} for ${group.map(u => `${u.uniqueid}:${u.lang}`)}`);
-        for (const user of group) {
-          const others = group.filter(u => u.uniqueid !== user.uniqueid).map(u => u.firstname);
-          const message = {
-            to: user.email,
-            subject: 'Today Croque lunch!',
-            text: happyEmail(user.firstname, others, location),
-          };
-          transporter.sendMail(message).then(winston.info);
-        }
-        return {
-          location: location.id,
-          users: group.map(u => u.uniqueid),
-        };
-      });
-
-      const cancelled = usersCancelled.map(user => {
-        winston.warn(`cancelling ${user.uniqueid} (${user.lang}`);
-        const message = {
-          to: user.email,
-          subject: 'Today Croque lunch!',
-          text: sadEmail(user.firstname),
-        };
-        transporter.sendMail(message).then(winston.info);
-        return user.uniqueid;
-      });
-
-      await db.updateMiam(noon, {
-        assignments,
-        cancelled,
-      });
-    },
-    null,
-    false,
-    config.tz
-  );
-  beat.start();
+  const reminderBeat = new Cron.CronJob('00 00 10 * * 2,4', reminderCron(db, transporter), null, false, config.tz);
+  reminderBeat.start();
 
   const tequilaStrategy = new tequilaPassport.Strategy(config.tequila);
   passport.use(tequilaStrategy);

@@ -29,6 +29,10 @@ const config = {
     },
     pool: {
       pool: true,
+      maxConnections: 5,
+      maxMessages: 200,
+      rateLimit: 8,
+      rateDelta: 1000,
       host: process.env.CROQUE_MAIL_HOST,
       port: process.env.CROQUE_MAIL_PORT,
     },

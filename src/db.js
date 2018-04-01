@@ -49,6 +49,12 @@ function injectOps(db: Object): Object {
       .write();
   };
 
+  db.getReminderUsers = async (): Promise<Array<string>> =>
+    db
+      .get('users')
+      .filter(u => u.reminder)
+      .value();
+
   /* eslint-enable no-param-reassign */
   return db;
 }

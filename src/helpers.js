@@ -7,35 +7,47 @@ import _ from 'lodash';
 import config from './config';
 import type { User } from './db';
 
-function computeNoon() {
-  return moment
-    .tz(config.tz)
+function setToNoon(date) {
+  return date
     .hours(12)
-    .minutes(15)
+    .minutes(10)
     .seconds(0)
     .milliseconds(0);
 }
 
+function computeTodayNoon() {
+  return setToNoon(moment.tz(config.tz));
+}
+
 function computeNextNoon() {
   // returns next noon by skipping weekend
-  let nextNoon = moment.tz(config.tz);
-  if (nextNoon.hours() >= 12) {
-    if (nextNoon.isoWeekday() === 5) {
-      nextNoon = nextNoon.add(3, 'd');
-    } else {
-      nextNoon = nextNoon.add(1, 'd');
-    }
+  const d = moment.tz(config.tz);
+
+  switch (d.isoWeekday()) {
+    case 1:
+      return setToNoon(d.add(1, 'd'));
+
+    case 2:
+      return setToNoon(d.hours() < 12 ? d : d.add(2, 'd'));
+
+    case 3:
+      return setToNoon(d.add(1, 'd'));
+
+    case 4:
+      return setToNoon(d.hours() < 12 ? d : d.add(5, 'd'));
+
+    case 5:
+      return setToNoon(d.add(4, 'd'));
+
+    case 6:
+      return setToNoon(d.add(3, 'd'));
+
+    case 7:
+      return setToNoon(d.add(2, 'd'));
+
+    default:
+      throw new Error('inconsistent weekday');
   }
-  if (nextNoon.isoWeekday() === 6) {
-    nextNoon = nextNoon.add(2, 'd');
-  } else if (nextNoon.isoWeekday() === 7) {
-    nextNoon = nextNoon.add(1, 'd');
-  }
-  return nextNoon
-    .hours(12)
-    .minutes(15)
-    .seconds(0)
-    .milliseconds(0);
 }
 
 function randomFactory(seed: string) {
@@ -148,4 +160,4 @@ function findGroups(users: Array<User>): Array<User> {
   return [groupsEn, groupsFr, cancelled];
 }
 
-export { computeNoon, computeNextNoon, decompose345, findDecomposition, makeGroup, findGroups };
+export { computeTodayNoon, computeNextNoon, decompose345, findDecomposition, makeGroup, findGroups };
