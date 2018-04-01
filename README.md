@@ -6,10 +6,8 @@ EPFL is a great place. Croque is an [Agepoly](https://agepoly.ch/) and [Musical]
 
 ## Concept
 
-Every EPFL member can register for next weekday lunch (in french, english or both). At **12.00PM**, joiners will be randomly assigned to groups of 3-4 people and **receive an email** containing one campus location and first names. They should meet there at **12.15PM** and decide where to go for lunch. The rest is up to them 🎉 !
+Every EPFL member can register for next Tuesday or Thursday lunch (in french, english or both). At **12.00PM**, joiners will be randomly assigned to groups of 3-4 people and **receive an email** containing one campus location and first names. They should meet there at **12.10PM** and decide where to go for lunch. The rest is up to them 🎉 !
 (In case of a lack of people, meetings will be postponed by email.)
-
-There is a single rule: please show up on time or cancel yourself before the assignment, otherwise you will be banned.
 
 ## Getting started
 
@@ -19,6 +17,8 @@ vim .env
 yarn
 yarn start dev
 ```
+
+Tequila login might enforce the usage of corresponding VPN to work. In this case, the login redirect might get stuck on `https://localhost:9000/...`, just change the url to `http://localhost:9000/...`.
 
 ## Deployment 
 
