@@ -60,10 +60,9 @@ function reminderCron(db: Object, transporter: Object): Function {
     winston.info('Reminder beat');
 
     const users = await db.getReminderUsers();
-    console.log(users);
 
     users.forEach(user => {
-      winston.warn(`reminder for ${user.uniqueid} (${user.lang})`);
+      winston.info(`reminder for ${user.uniqueid} (${user.lang})`);
       const message = {
         to: user.email,
         subject: 'Today Croque lunch!',
