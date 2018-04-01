@@ -6,3 +6,15 @@ body {
 .big.button .visible.content {
     line-height: 150% !important;
 }
+
+.text.center {
+    text-align: center;
+}
+
+.p5.top {
+    padding-top: 5px;
+}
+
+small {
+    line-height: 80%;
+}

@@ -39,7 +39,8 @@ const config = {
     helpers: {
       lang(lang: Object, options: ?Object) {
         if (options) {
-          return options.data.root.user.lang === lang ? 'checked' : '';
+          const { user } = options.data.root;
+          return user && user.lang === lang ? 'checked' : '';
         }
         return lang.data.root.user.lang;
       },

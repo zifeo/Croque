@@ -175,6 +175,15 @@ lowdbFactory().then(db => {
     }
   });
 
+  app.get('/subscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
+    const { uniqueid } = req.user;
+    db.updateUser(uniqueid, { reminder: true }).then(() => res.redirect('/'));
+  });
+  app.get('/unsubscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
+    const { uniqueid } = req.user;
+    db.updateUser(uniqueid, { reminder: false }).then(() => res.redirect('/'));
+  });
+
   app.get('/joining', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
 

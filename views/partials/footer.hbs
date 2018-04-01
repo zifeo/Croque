@@ -2,10 +2,17 @@
 <div class="ui accordion">
     <div class="active title">
         <i class="dropdown icon"></i>
-        Can I bring a friend with me?
+        What are the rules?
     </div>
     <div class="active content">
-        <p>Sure! However, please limit to a single friend as you already know each other and finding a table for more that 5-6 people might be sometime tricky.</p>
+        <p>There is a single rule: please show up on time or cancel yourself before the assignment, otherwise you will be <u>banned</u>.</p>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        Can I bring a friend with me?
+    </div>
+    <div class="content">
+        <p>Sure! However, please limit to a single friend as you already know each other and finding a table for more that 5-6 people might be tricky.</p>
     </div>
     <div class="title">
         <i class="dropdown icon"></i>
@@ -20,8 +27,13 @@
 <br>
 
 <p>
-    Give feedback to <a href="http://www.google.com/recaptcha/mailhide/d?k=01le0itcWtFVA0RbpM1fLmpg==&amp;c=NI3DsMs7oq89XqpbSlwWAIBVgzFn0O6qO2B_g-iSaA8=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\x3d01le0itcWtFVA0RbpM1fLmpg\x3d\x3d\x26c\x3dNI3DsMs7oq89XqpbSlwWAIBVgzFn0O6qO2B_g-iSaA8\x3d', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">c...</a>@epfl.life or contribute directly on <a href="https://github.com/zifeo/Croque">Github</a>.
-    {{# if user}}
-        <br> Connected as {{ user.firstname }}, <a href="sober">logout</a>.
-    {{/if}}
+    <small>
+        Give feedback to <a href="http://www.google.com/recaptcha/mailhide/d?k=01le0itcWtFVA0RbpM1fLmpg==&amp;c=NI3DsMs7oq89XqpbSlwWAIBVgzFn0O6qO2B_g-iSaA8=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\x3d01le0itcWtFVA0RbpM1fLmpg\x3d\x3d\x26c\x3dNI3DsMs7oq89XqpbSlwWAIBVgzFn0O6qO2B_g-iSaA8\x3d', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">c...</a>@epfl.life or contribute directly on <a href="https://github.com/zifeo/Croque">Github</a>.
+        <br>
+        {{# if user}}
+            Connected as {{ user.firstname }}, <a href="sober">logout</a>.
+        {{ else }}
+            <a href="drink">Login with Tequila</a> to manage lunch and reminders.
+        {{/if}}
+    </small>
 </p>

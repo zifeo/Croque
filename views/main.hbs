@@ -1,12 +1,12 @@
 
 <div class="ui one column stackable centered page grid">
-    <div class="column eight wide">
+    <div class="column ten wide">
         <br>
         {{> header }}
 
-        {{# if user}}
+        {{> lang }}
 
-            {{> lang }}
+        {{# if user}}
 
             {{# if joining}}
 
@@ -21,6 +21,16 @@
         {{else}}
 
             {{> pending }}
+
+        {{/if}}
+
+        {{# if user.reminder}}
+
+            {{> unsubscribe }}
+
+        {{else}}
+
+            {{> subscribe }}
 
         {{/if}}
 

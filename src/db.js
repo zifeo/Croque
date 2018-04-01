@@ -14,6 +14,7 @@ type User = {
   uniqueid: string,
   email: string,
   lastSeen: string,
+  reminder: boolean,
 };
 
 function injectOps(db: Object): Object {
@@ -29,6 +30,7 @@ function injectOps(db: Object): Object {
     return db
       .set(['users', uniqueid], {
         lang: 'both',
+        reminder: true,
         ...oldValues,
         ...values,
       })
