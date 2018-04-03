@@ -26,7 +26,7 @@ function lunchCron(db: Object, transporter: Object): Function {
         const others = group.filter(u => u.uniqueid !== user.uniqueid).map(u => u.firstname);
         const message = {
           to: user.email,
-          subject: 'Today Croque lunch!',
+          subject: 'Croque lunch!',
           text: happyEmail(user.firstname, others, location),
         };
         transporter.sendMail(message).then(winston.info);
@@ -41,7 +41,7 @@ function lunchCron(db: Object, transporter: Object): Function {
       winston.warn(`cancelling ${user.uniqueid} (${user.lang})`);
       const message = {
         to: user.email,
-        subject: 'Today Croque lunch!',
+        subject: 'Croque lunch!',
         text: sadEmail(user.firstname),
       };
       transporter.sendMail(message).then(winston.info);
@@ -65,7 +65,7 @@ function reminderCron(db: Object, transporter: Object): Function {
       winston.info(`reminder for ${user.uniqueid} (${user.lang})`);
       const message = {
         to: user.email,
-        subject: 'Today Croque lunch!',
+        subject: 'Reminder: Croque lunch!',
         text: reminderEmail(user.firstname),
       };
       transporter.sendMail(message).then(winston.info);

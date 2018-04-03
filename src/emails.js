@@ -34,7 +34,7 @@ Croque lunch is running today!
 Join or update your reminder settings there:
 https://croque.epfl.life
 
-See you at noon!
+See you and book before noon!
 
 Croque
   `;
