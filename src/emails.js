@@ -32,7 +32,7 @@ const reminderEmail = (firstName: string): string =>
 
 Croque lunch is running today!
 Join or update your reminder settings there:
-https://croque.epfl.life/drink
+https://croque.agepoly.ch/drink
 
 See you and book before noon!
 
