@@ -10,6 +10,7 @@
     "testOnly": "mocha --timeout 8000 --require babel-register"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.3",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-env": "^1.6.0",
@@ -20,8 +21,8 @@
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-babel": "^5.0.0",
-    "eslint-plugin-flowtype": "^2.46.2",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-flowtype": "^2.46.3",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.3.1",
@@ -35,7 +36,7 @@
     "grunt-contrib-htmlmin": "^2.0.0",
     "grunt-contrib-less": "^1.4.1",
     "grunt-contrib-uglify": "^3.0.1",
-    "grunt-contrib-watch": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.1",
     "grunt-env": "^0.4.4",
     "grunt-express-server": "^0.5.3",
     "load-grunt-tasks": "^3.5.2",
@@ -60,6 +61,6 @@
     "passport-tequila": "^0.1.12",
     "raven": "^2.5.0",
     "seedrandom": "^2.4.3",
-    "winston": "^2.4.0"
+    "winston": "^2.4.2"
   }
 }
