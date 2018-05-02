@@ -33,10 +33,10 @@ const locations: Array<Location> = [
     plan: 'https://plan.epfl.ch/?room=SG194.18',
   },
   {
-    id: 'rlc-1',
-    name: 'Rolex',
-    details: 'near the sofas at main entry',
-    plan: 'https://plan.epfl.ch/?room=RLCC1330',
+    id: 'med-1',
+    name: 'MED hall',
+    details: 'near the main doors',
+    plan: 'https://plan.epfl.ch/?room=MED194.22',
   },
   {
     id: 'ce-1',
