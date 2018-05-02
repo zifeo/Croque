@@ -19,7 +19,7 @@ PS: We are happy to hear your feedback, just reply to this email!
 const sadEmail = (firstName: string): string =>
   `Hey ${firstName},
 
-Sorry we weren't able the find enough people for next lunch.
+Sorry we weren't able the find enough people matching your language settings for the next lunch.
 Help us to spread the word and be sure this doesn't happen again!
 
 Bon appétit and see you at next lunch!
@@ -37,6 +37,8 @@ https://croque.agepoly.ch/drink
 See you and book before noon!
 
 Croque
+
+PS: You can disable this reminder using https://croque.agepoly.ch/unsubscribe
   `;
 
 export { happyEmail, sadEmail, reminderEmail };
