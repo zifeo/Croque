@@ -38,7 +38,7 @@ See you and book before noon!
 
 Croque
 
-PS: You can disable this reminder using https://croque.agepoly.ch/unsubscribe
+PS: Disable this reminder via https://croque.agepoly.ch/unsubscribe
   `;
 
 export { happyEmail, sadEmail, reminderEmail };
