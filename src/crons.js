@@ -23,7 +23,7 @@ function lunchCron(db: Object, transporter: Object): Function {
       const location = locations[i % locations.length];
       winston.info(`assigning group ${i} at ${location.id} for ${group.map(u => `${u.uniqueid}:${u.lang}`)}`);
       for (const user of group) {
-        const others = group.filter(u => u.uniqueid !== user.uniqueid).map(u => u.firstname);
+        const others = group.filter(u => u.uniqueid !== user.uniqueid).map(u => `${u.firstname} (${u.email})`);
         const message = {
           to: user.email,
           subject: 'Croque lunch!',
