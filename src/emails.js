@@ -31,7 +31,7 @@ const reminderEmail = (firstName: string): string =>
   `Hey ${firstName},
 
 Croque lunch is running today!
-Join or update your reminder settings there:
+Join or update your reminder settings there until 11:30 AM:
 https://croque.agepoly.ch/drink
 
 See you and book before noon!

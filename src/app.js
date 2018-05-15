@@ -50,7 +50,7 @@ transporter.verify((err, success) => {
 });
 
 lowdbFactory().then(db => {
-  const lunchBeat = new Cron.CronJob('00 00 12 * * 2,4', lunchCron(db, transporter), null, false, config.tz);
+  const lunchBeat = new Cron.CronJob('00 30 11 * * 2,4', lunchCron(db, transporter), null, false, config.tz);
   lunchBeat.start();
 
   const reminderBeat = new Cron.CronJob('00 00 10 * * 2,4', reminderCron(db, transporter), null, false, config.tz);
