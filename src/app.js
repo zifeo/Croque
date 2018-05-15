@@ -128,15 +128,20 @@ lowdbFactory().then(db => {
 
   app.get('/subscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
+    winston.info(`user subscribed: ${uniqueid}`);
+
     db.updateUser(uniqueid, { reminder: true }).then(() => res.redirect('/'));
   });
   app.get('/unsubscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
+    winston.info(`user unsubscribed: ${uniqueid}`);
+
     db.updateUser(uniqueid, { reminder: false }).then(() => res.redirect('/'));
   });
 
   app.get('/joining', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
+    winston.info(`joiner added: ${uniqueid}`);
 
     db.getMiam(req.nextNoon).then(noon => {
       const joiners = _.uniq(((noon && noon.joiners) || []).concat(uniqueid));
@@ -145,6 +150,7 @@ lowdbFactory().then(db => {
   });
   app.get('/pending', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
+    winston.info(`joiner removed: ${uniqueid}`);
 
     db.getMiam(req.nextNoon).then(noon => {
       const joiners = (noon && noon.joiners.filter(u => u !== uniqueid)) || [];
