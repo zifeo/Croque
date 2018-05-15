@@ -17,6 +17,10 @@ type User = {
   reminder: boolean,
 };
 
+function noonToString(noon: Noon): string {
+  return noon.toISOString().substr(0, 10);
+}
+
 function injectOps(db: Object): Object {
   /* eslint-disable no-param-reassign */
 
@@ -37,12 +41,12 @@ function injectOps(db: Object): Object {
       .write();
   };
 
-  db.getMiam = async (noon: Noon): Promise<Array<Object>> => db.get(['miams', noon.toISOString()]).value();
+  db.getMiam = async (noon: Noon): Promise<Array<Object>> => db.get(['miams', noonToString(noon)]).value();
 
   db.updateMiam = async (noon: Noon, values: Object): Promise<void> => {
     const oldValues = await db.getMiam(noon);
     return db
-      .set(['miams', noon.toISOString()], {
+      .set(['miams', noonToString(noon)], {
         ...oldValues,
         ...values,
       })
