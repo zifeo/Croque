@@ -28,13 +28,13 @@ function computeNextNoon() {
       return setToNoon(d.add(1, 'd'));
 
     case 2:
-      return setToNoon(d.hours() < 11 && d.minutes() < 30 ? d : d.add(2, 'd'));
+      return setToNoon(d.hours() < 11 || (d.hours() === 11 && d.minutes() < 30) ? d : d.add(2, 'd'));
 
     case 3:
       return setToNoon(d.add(1, 'd'));
 
     case 4:
-      return setToNoon(d.hours() < 11 && d.minutes() < 30 ? d : d.add(5, 'd'));
+      return setToNoon(d.hours() < 11 || (d.hours() === 11 && d.minutes() < 30) ? d : d.add(5, 'd'));
 
     case 5:
       return setToNoon(d.add(4, 'd'));
