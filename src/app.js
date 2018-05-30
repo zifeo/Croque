@@ -21,7 +21,7 @@ import Cron from 'cron';
 import { computeNextNoon } from './helpers';
 import lowdbFactory from './db';
 import config from './config';
-import { lunchCron, reminderCron } from './crons';
+import { lunchCron /* , reminderCron */ } from './crons';
 
 if (config.production) {
   Raven.config(config.raven, {
@@ -53,24 +53,24 @@ lowdbFactory().then(db => {
   const lunchBeat = new Cron.CronJob('00 30 11 * * 2,4', lunchCron(db, transporter), null, false, config.tz);
   lunchBeat.start();
 
+  /*
   const reminderBeat = new Cron.CronJob('00 00 10 * * 2,4', reminderCron(db, transporter), null, false, config.tz);
   reminderBeat.start();
+  */
 
   const tequilaStrategy = new tequilaPassport.Strategy(config.tequila);
   passport.use(tequilaStrategy);
   passport.serializeUser((tequilaInfo, done) => {
     const { id, tequila } = tequilaInfo;
     const { firstname, name, uniqueid, email } = tequila;
-    db
-      .updateUser(uniqueid, {
-        slug: id,
-        firstname,
-        name,
-        uniqueid,
-        email,
-        lastSeen: moment.tz(config.tz).toISOString(),
-      })
-      .then(() => done(null, uniqueid), err => done(err, uniqueid));
+    db.updateUser(uniqueid, {
+      slug: id,
+      firstname,
+      name,
+      uniqueid,
+      email,
+      lastSeen: moment.tz(config.tz).toISOString(),
+    }).then(() => done(null, uniqueid), err => done(err, uniqueid));
   });
   passport.deserializeUser((id, done) => {
     db.getUser(id).then(user => done(null, user));
