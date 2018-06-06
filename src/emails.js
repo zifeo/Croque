@@ -20,7 +20,11 @@ const sadEmail = (firstName: string): string =>
   `Hey ${firstName},
 
 Sorry we weren't able the find enough people matching your language settings for the next lunch.
-Help us to spread the word and be sure this doesn't happen again!
+Help us to spread the word and be sure this doesn't happen again!
+
+Important: Croque is currently on holidays (e.g. no daily reminder sent, ...) so there might be often too few participants.
+A season opening will be made in September.
+In the meanwhile you can help us to improve Croque by brainstorming ideas to make it even more popular (you can reach us by replying to this email)!
 
 Bon appétit and see you at next lunch!
 
