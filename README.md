@@ -28,3 +28,7 @@ docker pull node:latest
 docker run --rm -it -v "$(pwd):/data" node:latest /bin/sh -c 'cd /data && yarn && ./node_modules/.bin/grunt && rm -rf node_modules && yarn install --production'
 docker-compose down; docker-compose up -d --build
 ```
+
+## License
+
+Croque project is licensed [Apache 2.0](./LICENSE), however EPFL related elements are own by EPFL under appropriate copyright.
