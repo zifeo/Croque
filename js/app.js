@@ -1,7 +1,9 @@
-$(document).ready(function() {
-  $('.ui.accordion').accordion();
-  $('.ui.radio.checkbox').checkbox();
-  $('.lang.selector').on('click', function() {
+jQuery(document).ready(function() {
+  jQuery('.app .ui.accordion').accordion();
+  jQuery('.app .ui.radio.checkbox').checkbox();
+  jQuery('.app .lang.selector').on('click', function() {
     window.location.href = 'lang/' + $(this).attr('rel');
   });
 });
+
+

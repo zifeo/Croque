@@ -21,6 +21,14 @@ module.exports = function(grunt) {
         }
       }
     },
+    purifycss: {
+      options: {},
+      target: {
+        src: ['build/static/app.js', 'build/views/**/*.hbs'],
+        css: ['build/static/app.css'],
+        dest: 'build/static/app.css',
+      },
+    },
     htmlmin: {
       dist: {
         options: {
@@ -57,15 +65,15 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['js/**/*.js'],
-        tasks: 'uglify',
+        tasks: ['uglify', 'purifycss'],
       },
       less: {
         files: ['css/**/*.css'],
-        tasks: 'less',
+        tasks: ['less', 'purifycss'],
       },
       html: {
         files: ['views/**/*.hbs'],
-        tasks: 'htmlmin',
+        tasks: ['htmlmin', 'purifycss'],
       },
       files: {
         files: ['fonts/**/*', 'img/**/*'],
@@ -105,7 +113,7 @@ module.exports = function(grunt) {
     },
   });
 
-  grunt.registerTask('default', ['clean', 'uglify', 'less', 'htmlmin', 'copy', 'babel']);
+  grunt.registerTask('default', ['clean', 'uglify', 'less', 'htmlmin', 'purifycss', 'copy', 'babel']);
   grunt.registerTask('dev', ['default', 'env', 'express', 'watch']);
 
 };
