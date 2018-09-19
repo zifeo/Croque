@@ -7,7 +7,6 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import helmet from 'helmet';
-import winston from 'winston';
 import Raven from 'raven';
 import nodemailer from 'nodemailer';
 import expressHandlebars from 'express-handlebars';
@@ -18,10 +17,11 @@ import session from 'cookie-session';
 import moment from 'moment-timezone';
 import _ from 'lodash';
 import Cron from 'cron';
+import logger from './logger';
 import { computeNextNoon } from './helpers';
 import lowdbFactory from './db';
 import config from './config';
-import { lunchCron /* , reminderCron */ } from './crons';
+import { lunchCron, reminderCron } from './crons';
 
 if (config.production) {
   Raven.config(config.raven, {
@@ -30,7 +30,7 @@ if (config.production) {
 }
 
 process.on('unhandledRejection', err => {
-  winston.error(err);
+  logger.error(err);
   if (config.production) {
     Raven.captureException(err);
   }
@@ -43,9 +43,9 @@ process.on('SIGINT', () => {
 const transporter = nodemailer.createTransport(config.nodemailer.pool, config.nodemailer.mail);
 transporter.verify((err, success) => {
   if (err) {
-    winston.error('mail transport failure:', err);
+    logger.error('mail transport failure:', err);
   } else {
-    winston.info('mail transport ready:', success);
+    logger.info('mail transport ready:', success);
   }
 });
 
@@ -53,10 +53,8 @@ lowdbFactory().then(db => {
   const lunchBeat = new Cron.CronJob('00 30 11 * * 2,4', lunchCron(db, transporter), null, false, config.tz);
   lunchBeat.start();
 
-  /*
   const reminderBeat = new Cron.CronJob('00 00 10 * * 2,4', reminderCron(db, transporter), null, false, config.tz);
   reminderBeat.start();
-  */
 
   const tequilaStrategy = new tequilaPassport.Strategy(config.tequila);
   passport.use(tequilaStrategy);
@@ -128,20 +126,20 @@ lowdbFactory().then(db => {
 
   app.get('/subscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
-    winston.info(`user subscribed: ${uniqueid}`);
+    logger.info(`user subscribed: ${uniqueid}`);
 
     db.updateUser(uniqueid, { reminder: true }).then(() => res.redirect('/'));
   });
   app.get('/unsubscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
-    winston.info(`user unsubscribed: ${uniqueid}`);
+    logger.info(`user unsubscribed: ${uniqueid}`);
 
     db.updateUser(uniqueid, { reminder: false }).then(() => res.redirect('/'));
   });
 
   app.get('/joining', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
-    winston.info(`joiner added: ${uniqueid}`);
+    logger.info(`joiner added: ${uniqueid}`);
 
     db.getMiam(req.nextNoon).then(noon => {
       const joiners = _.uniq(((noon && noon.joiners) || []).concat(uniqueid));
@@ -150,7 +148,7 @@ lowdbFactory().then(db => {
   });
   app.get('/pending', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { uniqueid } = req.user;
-    winston.info(`joiner removed: ${uniqueid}`);
+    logger.info(`joiner removed: ${uniqueid}`);
 
     db.getMiam(req.nextNoon).then(noon => {
       const joiners = (noon && noon.joiners.filter(u => u !== uniqueid)) || [];
@@ -168,6 +166,6 @@ lowdbFactory().then(db => {
   app.use((req, res) => res.redirect('/'));
 
   app.listen(config.port, () => {
-    winston.info('Running on', config.port);
+    logger.info('Running on', config.port);
   });
 });

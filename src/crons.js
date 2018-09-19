@@ -1,6 +1,6 @@
 // @flow
 
-import winston from 'winston';
+import logger from './logger';
 
 import { computeTodayNoon, findGroups } from './helpers';
 import { happyEmail, sadEmail, reminderEmail } from './emails';
@@ -8,7 +8,7 @@ import locations from './locations';
 
 function lunchCron(db: Object, transporter: Object): Function {
   return async () => {
-    winston.info('Lunch beat');
+    logger.info('Lunch beat');
     const noon = computeTodayNoon();
     const miam = await db.getMiam(noon);
     if (!miam) {
@@ -21,7 +21,7 @@ function lunchCron(db: Object, transporter: Object): Function {
 
     const assignments = groupsEn.concat(groupsFr).map((group, i) => {
       const location = locations[i % locations.length];
-      winston.info(`assigning group ${i} at ${location.id} for ${group.map(u => `${u.uniqueid}:${u.lang}`)}`);
+      logger.info(`assigning group ${i} at ${location.id} for ${group.map(u => `${u.uniqueid}:${u.lang}`)}`);
       for (const user of group) {
         const others = group.filter(u => u.uniqueid !== user.uniqueid).map(u => `${u.firstname} (${u.email})`);
         const message = {
@@ -29,7 +29,7 @@ function lunchCron(db: Object, transporter: Object): Function {
           subject: 'Croque lunch!',
           text: happyEmail(user.firstname, others, location),
         };
-        transporter.sendMail(message).then(winston.info);
+        transporter.sendMail(message).then(logger.info);
       }
       return {
         location: location.id,
@@ -38,13 +38,13 @@ function lunchCron(db: Object, transporter: Object): Function {
     });
 
     const cancelled = usersCancelled.map(user => {
-      winston.warn(`cancelling ${user.uniqueid} (${user.lang})`);
+      logger.warn(`cancelling ${user.uniqueid} (${user.lang})`);
       const message = {
         to: user.email,
         subject: 'Croque lunch!',
         text: sadEmail(user.firstname),
       };
-      transporter.sendMail(message).then(winston.info);
+      transporter.sendMail(message).then(logger.info);
       return user.uniqueid;
     });
 
@@ -57,18 +57,18 @@ function lunchCron(db: Object, transporter: Object): Function {
 
 function reminderCron(db: Object, transporter: Object): Function {
   return async () => {
-    winston.info('Reminder beat');
+    logger.info('Reminder beat');
 
     const users = await db.getReminderUsers();
 
     users.forEach(user => {
-      winston.info(`reminder for ${user.uniqueid} (${user.lang})`);
+      logger.info(`reminder for ${user.uniqueid} (${user.lang})`);
       const message = {
         to: user.email,
         subject: 'Reminder: Croque lunch!',
         text: reminderEmail(user.firstname),
       };
-      transporter.sendMail(message).then(winston.info);
+      transporter.sendMail(message).then(logger.info);
     });
   };
 }
