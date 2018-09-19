@@ -14,12 +14,16 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12203352-3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
-        gtag('config', 'UA-12203352-3', { 'anonymize_ip': true });
+        gtag('config', 'UA-12203352-3', {'anonymize_ip': true});
     </script>
 
-    <link rel="shortcut icon" href="//www.epfl.ch/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="//www.epfl.ch/favicon.ico" type="image/x-icon"/>
 
 </head>
 <body>
@@ -63,38 +67,24 @@
                     </ul>
                 </nav>
             </div>
-            <div class="search"><a href="#search" class="icon icon-magnifier toggle-hidden ui-toggle"
-                                   data-widget="toggle" tabindex="0" role="button" aria-controls="search"><span
-                    class="visuallyhidden">Search</span></a>
+            <div class="search">
+                <a href="#search" class="icon icon-magnifier toggle-hidden ui-toggle" data-widget="toggle" tabindex="0"
+                   role="button" aria-controls="search">
+                    <span class="visuallyhidden">Recherche</span>
+                </a>
                 <div id="search" aria-hidden="true" role="search" class="toggle-hidden">
-                    <form id="search-form" class="form form-inline" action="//search.epfl.ch/psearch.action"><input
-                            type="hidden" name="request_locale" value="en"><input type="hidden" name="site" value=""
-                                                                                  disabled="disabled">
+                    <form id="search-form" class="form form-inline" action="//search.epfl.ch">
                         <div class="form-input-group">
-                            <div class="form-input"><label class="visuallyhidden" for="search-query">Search
-                                query</label><input id="search-query" class="search-query" type="text"
-                                                    placeholder="search query" name="q" accesskey="4"
-                                                    autocomplete="nope" aria-autocomplete="both" aria-expanded="false"
-                                                    aria-owns="search-suggestions" role="combobox"></div>
-                            <div class="form-select search-domain"><label class="visuallyhidden" for="search-domain">Search
-                                domain</label><select id="search-domain" name="domain">
-                                <option value="directory" selected="selected">Directory</option>
-                                <option value="epfl">EPFL websites</option>
-                                <option value="places">Places</option>
-                                <option value="courses">Courses</option>
-                                <option value="publications">Publications</option>
-                                <option value="news">News</option>
-                                <option value="units">Units</option>
-                            </select></div>
+                            <div class="form-input"><label class="visuallyhidden" for="search-query">Requête de
+                                recherche</label><input id="search-query" class="search-query" type="text"
+                                                        placeholder="chercher…" name="q" accesskey="4"></div>
                             <div class="form-input form-input-mini">
                                 <button class="themed search-submit" type="submit"><span class="icon icon-magnifier"
                                                                                          role="presentation"
                                                                                          hidden="hidden"></span><span
-                                        class="visuallyhidden">Search</span></button>
+                                        class="visuallyhidden">Chercher</span></button>
                             </div>
                         </div>
-                        <div class="autocomplete-suggestions" id="search-suggestions" role="listbox"
-                             style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div>
                     </form>
                 </div>
             </div>
