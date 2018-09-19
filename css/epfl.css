@@ -1205,7 +1205,7 @@ template {
     zoom: 1;
     position: relative;
     clear: both;
-    margin: 0 0 0 -.3075em
+    margin: 0
 }
 
 .epflnav .nav:after, .epflnav .nav:before, .g-row:after, .g-row:before, .site-content:after, .site-content:before, .site-footer:after, .site-footer:before, .site-header:after, .site-header:before {
@@ -5840,7 +5840,7 @@ textarea {
 .site {
     padding-left: .3075em;
     margin: 0 auto 2em auto;
-    width: 75.385em;
+    width: 100%;
     font-size: .8125em;
     line-height: 1.4em
 }
@@ -5933,7 +5933,7 @@ textarea {
 
 .site-header.epfl {
     padding: .3075em;
-    margin: 0 -.615em;
+    margin: 0;
     height: 4.16em
 }
 
