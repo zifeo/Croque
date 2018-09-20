@@ -2,6 +2,7 @@
 
 const config = {
   production: process.env.NODE_ENV === 'production',
+  url: process.env.CROQUE_URL,
   port: 9000,
   raven: process.env.CROQUE_RAVEN,
   tz: 'Europe/Zurich',

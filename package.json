@@ -6,8 +6,8 @@
     "start": "grunt --",
     "lint": "eslint --fix \"./{src,test}/**/*.js\"",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
-    "test": "mocha --timeout 8000 --recursive --require babel-register",
-    "testOnly": "mocha --timeout 8000 --require babel-register"
+    "test": "mocha --timeout 8000 --recursive --require @babel/register",
+    "testOnly": "mocha --timeout 8000 --require @babel/register"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",

@@ -26,6 +26,7 @@ services:
       - CROQUE_MAIL_HOST
       - CROQUE_MAIL_PORT
       - CROQUE_RAVEN
+      - CROQUE_URL
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:croque.agepoly.ch,croque.epfl.ch

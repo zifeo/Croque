@@ -1,6 +1,7 @@
 // @flow
 
 import type { Location } from './locations';
+import config from './config';
 
 const happyEmail = (firstName: string, others: Array<string>, location: Location): string =>
   `Hey ${firstName},
@@ -32,13 +33,13 @@ const reminderEmail = (firstName: string): string =>
 
 Croque lunch is running today!
 Join or update your reminder settings there:
-https://croque.epfl.ch/drink
+${config.url}/drink
 
 See you and book before 11:30AM!
 
 Croque
 
-PS: Disable this reminder via https://croque.epfl.ch/unsubscribe
+PS: Disable this reminder via ${config.url}/unsubscribe
   `;
 
 export { happyEmail, sadEmail, reminderEmail };
