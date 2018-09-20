@@ -29,7 +29,7 @@ function lunchCron(db: Object, transporter: Object): Function {
           subject: 'Croque lunch!',
           text: happyEmail(user.firstname, others, location),
         };
-        transporter.sendMail(message).then(logger.info);
+        transporter.sendMail(message).catch(logger.error);
       }
       return {
         location: location.id,
@@ -44,7 +44,7 @@ function lunchCron(db: Object, transporter: Object): Function {
         subject: 'Croque lunch!',
         text: sadEmail(user.firstname),
       };
-      transporter.sendMail(message).then(logger.info);
+      transporter.sendMail(message).catch(logger.error);
       return user.uniqueid;
     });
 
@@ -68,7 +68,7 @@ function reminderCron(db: Object, transporter: Object): Function {
         subject: 'Reminder: Croque lunch!',
         text: reminderEmail(user.firstname),
       };
-      transporter.sendMail(message).then(logger.info);
+      transporter.sendMail(message).catch(logger.error);
     });
   };
 }
