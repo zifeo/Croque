@@ -9,6 +9,7 @@ const config = {
   tequila: {
     service: 'Croque',
     request: ['uniqueid', 'name', 'firstname', 'email'],
+    allows: 'categorie=shibboleth',
     // require: "group=student"
   },
   lowdb: {

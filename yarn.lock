@@ -1364,7 +1364,7 @@ dateformat@~1.0.12:
     get-stdin "^4.0.1"
     meow "^3.3.0"
 
-debug@2.6.9, debug@^2.1.1, debug@^2.6.8, debug@^2.6.9:
+debug@2.6.9, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
@@ -3419,12 +3419,11 @@ passport-strategy@1.x.x, passport-strategy@^1.0.0:
   resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
   integrity sha1-tVOaqPwiWj0a0XlHbd8ja0QPUuQ=
 
-passport-tequila@^0.1.12:
+"passport-tequila@https://gitlab.com/epfl-sti/passport-tequila.git":
   version "0.1.12"
-  resolved "https://registry.yarnpkg.com/passport-tequila/-/passport-tequila-0.1.12.tgz#861cc04b1e97c08f66c42f97f9421eb1a42fd519"
-  integrity sha1-hhzASx6XwI9mxC+X+UIesaQv1Rk=
+  resolved "https://gitlab.com/epfl-sti/passport-tequila.git#cc9b61cf3dddf3893c34b0d3b03b41b6538813c2"
   dependencies:
-    debug "^2.1.1"
+    debug "^2.6.9"
     passport "^0.2.1"
     passport-strategy "^1.0.0"
 
