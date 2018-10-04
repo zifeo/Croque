@@ -3419,9 +3419,10 @@ passport-strategy@1.x.x, passport-strategy@^1.0.0:
   resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
   integrity sha1-tVOaqPwiWj0a0XlHbd8ja0QPUuQ=
 
-"passport-tequila@https://gitlab.com/epfl-sti/passport-tequila.git":
-  version "0.1.12"
-  resolved "https://gitlab.com/epfl-sti/passport-tequila.git#cc9b61cf3dddf3893c34b0d3b03b41b6538813c2"
+passport-tequila@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/passport-tequila/-/passport-tequila-0.1.13.tgz#940232307f6911268893335c2f3ced283dd5df4f"
+  integrity sha512-jf3zTyg2ub6gSpJ/RZGlX+H+nTerNVGx5vrssMwUznF5SQ13f/k3NDaUnMTvCT3A8XTBNBiBElWcge/hjQ7dMA==
   dependencies:
     debug "^2.6.9"
     passport "^0.2.1"
