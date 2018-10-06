@@ -8,7 +8,7 @@ const config = {
   tz: 'Europe/Zurich',
   tequila: {
     service: 'Croque',
-    request: ['uniqueid', 'name', 'firstname', 'email'],
+    request: ['name', 'firstname', 'email'],
     allows: 'categorie=shibboleth',
     // require: "group=student"
   },
