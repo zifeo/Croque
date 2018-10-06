@@ -9,6 +9,18 @@
     </div>
     <div class="title">
         <i class="dropdown icon"></i>
+        Where are the assignment locations?
+    </div>
+    <div class="content">
+        <p>Meeting points will be drawn form this list:</p>
+        <ul>
+            {{# each locations}}
+            <li>{{ this.name }} <small>({{ this.details }}, <a href="{{ this.plan }}">plan</a>)</small></li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
         Can I bring a friend/colleague with me?
     </div>
     <div class="content">

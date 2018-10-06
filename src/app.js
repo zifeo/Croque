@@ -20,6 +20,7 @@ import Cron from 'cron';
 import logger from './logger';
 import { computeNextNoon } from './helpers';
 import lowdbFactory from './db';
+import locations from './locations';
 import config from './config';
 import { lunchCron /* , reminderCron */ } from './crons';
 
@@ -104,6 +105,7 @@ lowdbFactory().then(db => {
     req.nextNoon = nextNoon;
     res.locals.nextNoon = nextNoon.format('dddd D MMMM');
     res.locals.nextNoonToNow = nextNoon.fromNow();
+    res.locals.locations = locations;
 
     db.getMiam(nextNoon).then(noon => {
       res.locals.joining = !req.user ? false : noon && noon.joiners.includes(req.user.uniqueid);
