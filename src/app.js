@@ -13,6 +13,7 @@ import expressHandlebars from 'express-handlebars';
 import path from 'path';
 import passport from 'passport';
 import tequilaPassport from 'passport-tequila';
+import Protocol from 'passport-tequila/lib/passport-tequila/protocol';
 import session from 'cookie-session';
 import moment from 'moment-timezone';
 import _ from 'lodash';
@@ -48,6 +49,20 @@ transporter.verify((err, success) => {
     logger.info('mail transport ready:', success);
   }
 });
+
+const wayf = {
+  epfl: 'https://idp.epfl.ch/idp/shibboleth',
+  unil: 'https://aai.unil.ch/idp/shibboleth',
+};
+
+// inject shibboleth forced auth identify provider
+Protocol.prototype.requestauth = function requestauth(res, tequilaAnswers) {
+  const portFragment = this.tequila_port !== 443 ? `:${this.tequila_port}` : '';
+  const redirectUrl =
+    `https://${this.tequila_host}${portFragment}${this.tequila_requestauth_path}` +
+    `?requestkey=${tequilaAnswers.key}&wayf=${encodeURIComponent(wayf.epfl)}`;
+  res.redirect(redirectUrl);
+};
 
 lowdbFactory().then(db => {
   const lunchBeat = new Cron.CronJob('00 30 11 * * 2,4', lunchCron(db, transporter), null, false, config.tz);
