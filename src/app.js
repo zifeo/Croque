@@ -61,7 +61,7 @@ Protocol.prototype.requestauth = function requestauth(res, tequilaAnswers) {
   const portFragment = this.tequila_port !== 443 ? `:${this.tequila_port}` : '';
   const redirectUrl =
     `https://${this.tequila_host}${portFragment}${this.tequila_requestauth_path}` +
-    `?requestkey=${tequilaAnswers.key}&wayf=${encodeURIComponent(wayf.epfl)}`;
+    `?requestkey=${tequilaAnswers.key}&wayf=${encodeURIComponent(wayf.unil)}`;
   res.redirect(redirectUrl);
 };
 
