@@ -8,7 +8,8 @@ const happyEmail = (firstName: string, others: Array<string>, location: Location
   
 Here is finally your lunch rendez-vous!
 Let's meet ${others.join(', ')} at 12.10PM at ${location.name}.
-Please go ${location.details} ${location.plan} and look for the others on time :).
+Please go ${location.details} (${location.plan}) and look for the others on time :).
+As a discrete rallying sign you can put one hand on your stomach.
 
 Bon appétit and have fun!
 
