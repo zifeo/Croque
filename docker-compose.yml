@@ -29,6 +29,6 @@ services:
       - CROQUE_URL
     labels:
       - traefik.enable=true
-      - traefik.frontend.rule=Host:unil.croque.app
+      - traefik.frontend.rule=Host:unige.croque.app
       - traefik.port=9000
       - traefik.docker.network=front

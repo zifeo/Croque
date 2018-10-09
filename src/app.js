@@ -54,6 +54,7 @@ transporter.verify((err, success) => {
 const wayf = {
   epfl: 'https://idp.epfl.ch/idp/shibboleth',
   unil: 'https://aai.unil.ch/idp/shibboleth',
+  unige: 'https://idp.unige.ch/idp/shibboleth',
 };
 
 // inject shibboleth forced auth identify provider
@@ -61,7 +62,7 @@ Protocol.prototype.requestauth = function requestauth(res, tequilaAnswers) {
   const portFragment = this.tequila_port !== 443 ? `:${this.tequila_port}` : '';
   const redirectUrl =
     `https://${this.tequila_host}${portFragment}${this.tequila_requestauth_path}` +
-    `?requestkey=${tequilaAnswers.key}&wayf=${encodeURIComponent(wayf.unil)}`;
+    `?requestkey=${tequilaAnswers.key}&wayf=${encodeURIComponent(wayf.unige)}`;
   res.redirect(redirectUrl);
 };
 
