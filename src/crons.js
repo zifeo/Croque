@@ -21,9 +21,9 @@ function lunchCron(db: Object, transporter: Object): Function {
 
     const assignments = groupsEn.concat(groupsFr).map((group, i) => {
       const location = locations[i % locations.length];
-      logger.info(`assigning group ${i} at ${location.id} for ${group.map(u => `${u.uniqueid}:${u.lang}`)}`);
+      logger.info(`assigning group ${i} at ${location.id} for ${group.map(u => `${u.email}:${u.lang}`)}`);
       for (const user of group) {
-        const others = group.filter(u => u.uniqueid !== user.uniqueid).map(u => `${u.firstname} (${u.email})`);
+        const others = group.filter(u => u.email !== user.email).map(u => `${u.firstname} (${u.email})`);
         const message = {
           to: user.email,
           subject: 'Croque lunch!',
@@ -33,19 +33,19 @@ function lunchCron(db: Object, transporter: Object): Function {
       }
       return {
         location: location.id,
-        users: group.map(u => u.uniqueid),
+        users: group.map(u => u.email),
       };
     });
 
     const cancelled = usersCancelled.map(user => {
-      logger.warn(`cancelling ${user.uniqueid} (${user.lang})`);
+      logger.warn(`cancelling ${user.email} (${user.lang})`);
       const message = {
         to: user.email,
         subject: 'Croque lunch!',
         text: sadEmail(user.firstname),
       };
       transporter.sendMail(message).catch(logger.error);
-      return user.uniqueid;
+      return user.email;
     });
 
     await db.updateMiam(noon, {
@@ -62,7 +62,7 @@ function reminderCron(db: Object, transporter: Object): Function {
     const users = await db.getReminderUsers();
 
     users.forEach(user => {
-      logger.info(`reminder for ${user.uniqueid} (${user.lang})`);
+      logger.info(`reminder for ${user.email} (${user.lang})`);
       const message = {
         to: user.email,
         subject: 'Reminder: Croque lunch!',
