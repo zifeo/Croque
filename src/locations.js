@@ -29,7 +29,7 @@ const locations: Array<Location> = [
   {
     id: 'uni-2',
     name: 'Unithèque',
-    details: 'in front of the stairs near the main entrance',
+    details: 'in front of the stairs near the main entrance (inside)',
     plan: 'https://planete.unil.ch/plan/?local=%27UTQ-2.226%27',
   },
   {
