@@ -7,97 +7,54 @@ type Location = {
   plan: string,
 };
 
-/*
-
-Unimail Tram
-Sous le dernier arbre en face de la sortie à droite en sortant d'unimail
-https://maps.google.com/?q=46.194625,6.140431
-
-Unimail Parc
-En sortant d'unimail sur la droite vers la boulangerie poully
-https://maps.google.com/?q=46.195478,6.139574
-
-Plainpalais South
-À l'angle de l'avenue Henri dunant et de l'avenue du mail
-???
-
-Plainpalais West
-Sur le trottoir de plainpalais en face de l'éléphant de la cannette (traverser la route depuis l'éléphant et attendre sur le trottoir opposé)
-https://maps.google.com/?q=46.197798,6.139269
-
-Plainpalais East
-En haut des escaliers du parking de plainpalais, pas loin de la buvette.
-https://maps.google.com/?q=46.198235,6.141788
-
-Plainpalais North
-Derrière le Skatepark côté route Henri Marc
-https://maps.google.com/?q=46.199703,6.140262
-
-Dufour Entrance
-vers le panneau parking du parking de vélos pile en face de la sortie
-https://maps.google.com/?q=46.199780,6.142794
-
-Grand Théâtre
-Sur les escaliers du grand théâtre, à gauche en étant face au théâtre.
-https://maps.google.com/?q=46.201440,6.142915
----> plutôt uni bastion ?
-
- */
-
 const locations: Array<Location> = [
   {
     id: 'uni-1',
-    name: 'Unithèque',
-    details: 'near the water fountain, on the right when entering',
-    plan: 'https://planete.unil.ch/plan/?local=%27UTQ-2.226%27',
-  },
-  {
-    id: 'geo-1',
-    name: 'Géopolis',
-    details: 'in front of the lifts, 1st floor',
-    plan: 'https://planete.unil.ch/plan/?local=%27GEO-1000%27',
-  },
-  {
-    id: 'css-1',
-    name: 'Centre Sport et Santé',
-    details: 'near the BCV cash machine',
-    plan: 'https://planete.unil.ch/plan/?local=%27CSS-110%27',
+    name: 'Unimail Tram',
+    details: 'underneath the last tree on the right when getting out of Unimail - Tram side',
+    plan: 'https://goo.gl/maps/UTc1N8S91UT2',
   },
   {
     id: 'uni-2',
-    name: 'Unithèque',
-    details: 'in front of the stairs near the main entrance (inside)',
-    plan: 'https://planete.unil.ch/plan/?local=%27UTQ-2.226%27',
+    name: 'Unimail Parc',
+    details: 'in front of bakery Poully on the right when getting out of Unimail - Parc side',
+    plan: 'https://goo.gl/maps/Ed8Ra3ERNCv',
   },
   {
-    id: 'geo-2',
-    name: 'Géopolis',
-    details: 'in front of the stairs, 1st floor',
-    plan: 'https://planete.unil.ch/plan/?local=%27GEO-1000%27',
+    id: 'pla-1',
+    name: 'Plainpalais East',
+    details: 'at the top of the Plainpalais parking stairs, near the bar',
+    plan: 'https://goo.gl/maps/ySUWtPzwUHy',
   },
   {
-    id: 'amph-1',
-    name: 'Amphimax',
+    id: 'pla-2',
+    name: 'Plainpalais South',
+    details: 'at the street corner between avenue Henri dunant and avenue du Mail',
+    plan: 'https://goo.gl/maps/L33wXcE7BvE2',
+  },
+  {
+    id: 'pla-3',
+    name: 'Plainpalais West',
+    details: 'near the blue bike parking sign in front of the entrance',
+    plan: 'https://goo.gl/maps/4Ve7uAUcFxr',
+  },
+  {
+    id: 'duf-1',
+    name: 'Dufour Entrance',
     details: 'near the distributors in front of Amphimax entrance, 3rd floor',
-    plan: 'https://planete.unil.ch/plan/?local=%27MAX-300%27',
+    plan: 'https://goo.gl/maps/YWYQZqkTJLL2',
   },
   {
-    id: 'anth-1',
-    name: 'Anthropole',
-    details: 'near the cafeteria water fountain',
-    plan: 'https://planete.unil.ch/plan/?local=%27ANT-1084.1%27',
+    id: 'pla-4',
+    name: 'Plainpalais North - Frankenstein',
+    details: 'behind the Skatepark, near the monument of the Frankenstein monster',
+    plan: 'https://goo.gl/maps/8C1EvVh1cbq',
   },
   {
-    id: 'uni-3',
-    name: 'Unithèque',
-    details: 'in front of the library entrance, 4th floor',
-    plan: 'https://planete.unil.ch/plan/?local=%27UTQ-1.445%27',
-  },
-  {
-    id: 'geo-3',
-    name: 'Géopolis',
-    details: 'in front of room 1612, on the right when entering',
-    plan: 'https://planete.unil.ch/plan/?local=%27GEO-1000%27',
+    id: 'duf-2',
+    name: 'Place Neuve - Général Dufour',
+    details: 'on the stairs of the Général Dufour statue at the center of place Neuve',
+    plan: 'https://goo.gl/maps/WRseP3Na3o12',
   },
 ];
 
