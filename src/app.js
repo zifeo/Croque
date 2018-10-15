@@ -13,6 +13,7 @@ import expressHandlebars from 'express-handlebars';
 import path from 'path';
 import passport from 'passport';
 import tequilaPassport from 'passport-tequila';
+import Protocol from 'passport-tequila/lib/passport-tequila/protocol';
 import session from 'cookie-session';
 import moment from 'moment-timezone';
 import _ from 'lodash';
@@ -50,6 +51,20 @@ transporter.verify((err, success) => {
   }
 });
 
+const wayf = {
+  epfl: 'https://idp.epfl.ch/idp/shibboleth',
+  unil: 'https://aai.unil.ch/idp/shibboleth',
+};
+
+// inject shibboleth forced auth identify provider
+Protocol.prototype.requestauth = function requestauth(res, tequilaAnswers) {
+  const portFragment = this.tequila_port !== 443 ? `:${this.tequila_port}` : '';
+  const redirectUrl =
+    `https://${this.tequila_host}${portFragment}${this.tequila_requestauth_path}` +
+    `?requestkey=${tequilaAnswers.key}&wayf=${encodeURIComponent(wayf.epfl)}`;
+  res.redirect(redirectUrl);
+};
+
 lowdbFactory().then(db => {
   const lunchBeat = new Cron.CronJob('00 30 11 * * 2,4', lunchCron(db, transporter), null, false, config.tz);
   lunchBeat.start();
@@ -60,19 +75,17 @@ lowdbFactory().then(db => {
   const tequilaStrategy = new tequilaPassport.Strategy(config.tequila);
   passport.use(tequilaStrategy);
   passport.serializeUser((tequilaInfo, done) => {
-    const { id, tequila } = tequilaInfo;
-    const { firstname, name, uniqueid, email } = tequila;
-    db.updateUser(uniqueid, {
-      slug: id,
+    const { tequila } = tequilaInfo;
+    const { firstname, name, email } = tequila;
+    db.updateUser(email, {
       firstname,
       name,
-      uniqueid,
       email,
       lastSeen: moment.tz(config.tz).toISOString(),
-    }).then(() => done(null, uniqueid), err => done(err, uniqueid));
+    }).then(() => done(null, email), err => done(err, email));
   });
-  passport.deserializeUser((id, done) => {
-    db.getUser(id).then(user => done(null, user));
+  passport.deserializeUser((email, done) => {
+    db.getUser(email).then(user => done(null, user));
   });
 
   const app = express();
@@ -106,7 +119,7 @@ lowdbFactory().then(db => {
     res.locals.locations = locations;
 
     db.getMiam(nextNoon).then(noon => {
-      res.locals.joining = !req.user ? false : noon && noon.joiners.includes(req.user.uniqueid);
+      res.locals.joining = !req.user ? false : noon && noon.joiners.includes(req.user.email);
       next();
     });
   });
@@ -118,42 +131,42 @@ lowdbFactory().then(db => {
 
   app.get('/lang/:lang', tequilaStrategy.ensureAuthenticated, (req, res, next) => {
     const { lang } = req.params;
-    const { uniqueid } = req.user;
+    const { email } = req.user;
     if (lang !== 'fr' && lang !== 'en' && lang !== 'both') {
       next();
     } else {
-      db.updateUser(uniqueid, { lang }).then(() => res.redirect('/'));
+      db.updateUser(email, { lang }).then(() => res.redirect('/'));
     }
   });
 
   app.get('/subscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
-    const { uniqueid } = req.user;
-    logger.info(`user subscribed: ${uniqueid}`);
+    const { email } = req.user;
+    logger.info(`user subscribed: ${email}`);
 
-    db.updateUser(uniqueid, { reminder: true }).then(() => res.redirect('/'));
+    db.updateUser(email, { reminder: true }).then(() => res.redirect('/'));
   });
   app.get('/unsubscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
-    const { uniqueid } = req.user;
-    logger.info(`user unsubscribed: ${uniqueid}`);
+    const { email } = req.user;
+    logger.info(`user unsubscribed: ${email}`);
 
-    db.updateUser(uniqueid, { reminder: false }).then(() => res.redirect('/'));
+    db.updateUser(email, { reminder: false }).then(() => res.redirect('/'));
   });
 
   app.get('/joining', tequilaStrategy.ensureAuthenticated, (req, res) => {
-    const { uniqueid } = req.user;
-    logger.info(`joiner added: ${uniqueid}`);
+    const { email } = req.user;
+    logger.info(`joiner added: ${email}`);
 
     db.getMiam(req.nextNoon).then(noon => {
-      const joiners = _.uniq(((noon && noon.joiners) || []).concat(uniqueid));
+      const joiners = _.uniq(((noon && noon.joiners) || []).concat(email));
       db.updateMiam(req.nextNoon, { joiners }).then(() => res.redirect('/'));
     });
   });
   app.get('/pending', tequilaStrategy.ensureAuthenticated, (req, res) => {
-    const { uniqueid } = req.user;
-    logger.info(`joiner removed: ${uniqueid}`);
+    const { email } = req.user;
+    logger.info(`joiner removed: ${email}`);
 
     db.getMiam(req.nextNoon).then(noon => {
-      const joiners = (noon && noon.joiners.filter(u => u !== uniqueid)) || [];
+      const joiners = (noon && noon.joiners.filter(u => u !== email)) || [];
       db.updateMiam(req.nextNoon, { joiners }).then(() => res.redirect('/'));
     });
   });

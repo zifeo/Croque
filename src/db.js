@@ -4,14 +4,11 @@ import low from 'lowdb';
 import FileAsync from 'lowdb/adapters/FileAsync';
 import config from './config';
 
-type Id = string;
 type Noon = Date;
 type User = {
   lang: 'fr' | 'en' | 'both',
-  slug: string,
   firstname: string,
   name: string,
-  uniqueid: string,
   email: string,
   lastSeen: string,
   reminder: boolean,
@@ -24,15 +21,15 @@ function noonToString(noon: Noon): string {
 function injectOps(db: Object): Object {
   /* eslint-disable no-param-reassign */
 
-  db.getUser = async (uniqueid: Id): Promise<Object> => db.get(['users', uniqueid]).value();
+  db.getUser = async (email: string): Promise<Object> => db.get(['users', email]).value();
 
-  db.getUsers = async (uniqueids: Array<Id>): Promise<Array<Object>> =>
-    uniqueids.map(uniqueid => db.get(['users', uniqueid]).value());
+  db.getUsers = async (emails: Array<string>): Promise<Array<Object>> =>
+    emails.map(email => db.get(['users', email]).value());
 
-  db.updateUser = async (uniqueid: Id, values: Object): Promise<void> => {
-    const oldValues = await db.getUser(uniqueid);
+  db.updateUser = async (email: string, values: Object): Promise<void> => {
+    const oldValues = await db.getUser(email);
     return db
-      .set(['users', uniqueid], {
+      .set(['users', email], {
         lang: 'both',
         reminder: true,
         ...oldValues,
