@@ -22,7 +22,7 @@ import { computeNextNoon } from './helpers';
 import lowdbFactory from './db';
 import locations from './locations';
 import config from './config';
-import { lunchCron /* , reminderCron */ } from './crons';
+import { lunchCron, reminderCron } from './crons';
 
 if (config.production) {
   Raven.config(config.raven, {
@@ -54,10 +54,8 @@ lowdbFactory().then(db => {
   const lunchBeat = new Cron.CronJob('00 30 11 * * 2,4', lunchCron(db, transporter), null, false, config.tz);
   lunchBeat.start();
 
-  /*
   const reminderBeat = new Cron.CronJob('00 00 10 * * 2,4', reminderCron(db, transporter), null, false, config.tz);
   reminderBeat.start();
-  */
 
   const tequilaStrategy = new tequilaPassport.Strategy(config.tequila);
   passport.use(tequilaStrategy);
