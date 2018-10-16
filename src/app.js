@@ -85,7 +85,7 @@ lowdbFactory().then(db => {
     }).then(() => done(null, email), err => done(err, email));
   });
   passport.deserializeUser((email, done) => {
-    db.getUser(email).then(user => done(null, user));
+    db.getUser(email).then(user => done(null, user), err => done(err, null));
   });
 
   const app = express();
