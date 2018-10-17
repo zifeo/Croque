@@ -17,31 +17,31 @@ const locations: Array<Location> = [
   {
     id: 'uni-2',
     name: 'Unimail Parc',
-    details: 'in front of bakery Poully on the right when getting out of Unimail - Parc side',
+    details: 'in front of bakery Poully, on the right when getting out of Unimail - Parc side',
     plan: 'https://goo.gl/maps/Ed8Ra3ERNCv',
   },
   {
     id: 'pla-1',
     name: 'Plainpalais East',
-    details: 'at the top of the Plainpalais parking stairs, near the bar',
+    details: 'at the top of the Plainpalais parking stairs, near the café-buvette',
     plan: 'https://goo.gl/maps/ySUWtPzwUHy',
   },
   {
     id: 'pla-2',
     name: 'Plainpalais South',
-    details: 'at the street corner between avenue Henri dunant and avenue du Mail',
+    details: 'at the street corner between avenue Henri Dunant and avenue du Mail',
     plan: 'https://goo.gl/maps/L33wXcE7BvE2',
   },
   {
     id: 'pla-3',
     name: 'Plainpalais West',
-    details: 'near the blue bike parking sign in front of the entrance',
+    details: "by the pedestrian crossing in front of l'Elephant dans la Canette, on the other side of the road",
     plan: 'https://goo.gl/maps/4Ve7uAUcFxr',
   },
   {
     id: 'duf-1',
     name: 'Dufour Entrance',
-    details: 'near the distributors in front of Amphimax entrance, 3rd floor',
+    details: 'near the blue parking sign by the bike parking in front of the entrance',
     plan: 'https://goo.gl/maps/YWYQZqkTJLL2',
   },
   {
