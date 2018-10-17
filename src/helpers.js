@@ -10,7 +10,7 @@ import type { User } from './db';
 function setToNoon(date) {
   return date
     .hours(12)
-    .minutes(10)
+    .minutes(15)
     .seconds(0)
     .milliseconds(0);
 }

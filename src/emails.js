@@ -7,7 +7,7 @@ const happyEmail = (firstName: string, others: Array<string>, location: Location
   `Hey ${firstName},
   
 Here is finally your lunch rendez-vous!
-Let's meet ${others.join(', ')} at 12.10PM at ${location.name}.
+Let's meet ${others.join(', ')} at 12.15PM at ${location.name}.
 Please go ${location.details} (${location.plan}) and look for the others on time :).
 As a discrete rallying sign you can put one hand on your stomach.
 
