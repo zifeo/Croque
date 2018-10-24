@@ -21,12 +21,6 @@ const locations: Array<Location> = [
     plan: 'https://planete.unil.ch/plan/?local=%27GEO-1000%27',
   },
   {
-    id: 'css-1',
-    name: 'Centre Sport et Santé',
-    details: 'near the BCV cash machine',
-    plan: 'https://planete.unil.ch/plan/?local=%27CSS-110%27',
-  },
-  {
     id: 'uni-2',
     name: 'Unithèque',
     details: 'in front of the stairs near the main entrance (inside)',
@@ -43,6 +37,12 @@ const locations: Array<Location> = [
     name: 'Amphimax',
     details: 'near the distributors in front of Amphimax entrance, 3rd floor',
     plan: 'https://planete.unil.ch/plan/?local=%27MAX-300%27',
+  },
+  {
+    id: 'css-1',
+    name: 'Centre Sport et Santé',
+    details: 'near the BCV cash machine',
+    plan: 'https://planete.unil.ch/plan/?local=%27CSS-110%27',
   },
   {
     id: 'anth-1',
