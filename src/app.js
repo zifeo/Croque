@@ -126,6 +126,18 @@ lowdbFactory().then(db => {
 
   app.get('/', (req, res) => res.render('main'));
 
+  app.get('/admin', tequilaStrategy.ensureAuthenticated, (req, res, next) => {
+    if (!_.includes(config.admin, req.user.email)) {
+      next();
+      return;
+    }
+    res.locals.algo = {
+      v: 1,
+      value: req.user.email,
+    };
+    res.render('admin');
+  });
+
   app.get('/drink', tequilaStrategy.ensureAuthenticated, (req, res) => res.redirect('/'));
   app.get('/sober', tequilaStrategy.globalLogout('/'));
 
