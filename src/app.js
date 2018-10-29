@@ -18,12 +18,15 @@ import session from 'cookie-session';
 import moment from 'moment-timezone';
 import _ from 'lodash';
 import Cron from 'cron';
+import grpc from 'grpc';
 import logger from './logger';
 import { computeNextNoon } from './helpers';
 import lowdbFactory from './db';
 import locations from './locations';
 import config from './config';
 import { lunchCron, reminderCron } from './crons';
+import messages from './croc/gen/match_pb';
+import services from './croc/gen/match_grpc_pb';
 
 if (config.production) {
   Raven.config(config.raven, {
@@ -131,11 +134,20 @@ lowdbFactory().then(db => {
       next();
       return;
     }
-    res.locals.algo = {
-      v: 1,
-      value: req.user.email,
-    };
-    res.render('admin');
+
+    const client = new services.SearchServiceClient('localhost:50051', grpc.credentials.createInsecure());
+    const request = new messages.Req();
+    request.setContent('test');
+
+    client.search(request, (err, response) => {
+      console.log('Greeting:', response.toObject().content);
+
+      res.locals.algo = {
+        v: 1,
+        value: req.user.email,
+      };
+      res.render('admin');
+    });
   });
 
   app.get('/drink', tequilaStrategy.ensureAuthenticated, (req, res) => res.redirect('/'));
