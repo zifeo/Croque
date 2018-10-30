@@ -160,4 +160,4 @@ function findGroups(users: Array<User>): Array<User> {
   return [groupsEn, groupsFr, cancelled];
 }
 
-export { computeTodayNoon, computeNextNoon, decompose345, findDecomposition, makeGroup, findGroups };
+export { setToNoon, computeTodayNoon, computeNextNoon, decompose345, findDecomposition, makeGroup, findGroups };

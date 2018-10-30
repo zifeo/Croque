@@ -17,16 +17,14 @@ import Protocol from 'passport-tequila/lib/passport-tequila/protocol';
 import session from 'cookie-session';
 import moment from 'moment-timezone';
 import _ from 'lodash';
+import fetch from 'node-fetch';
 import Cron from 'cron';
-import grpc from 'grpc';
 import logger from './logger';
-import { computeNextNoon } from './helpers';
+import { computeNextNoon, setToNoon } from './helpers';
 import lowdbFactory from './db';
 import locations from './locations';
 import config from './config';
 import { lunchCron, reminderCron } from './crons';
-import messages from './croc/gen/match_pb';
-import services from './croc/gen/match_grpc_pb';
 
 if (config.production) {
   Raven.config(config.raven, {
@@ -129,25 +127,39 @@ lowdbFactory().then(db => {
 
   app.get('/', (req, res) => res.render('main'));
 
-  app.get('/admin', tequilaStrategy.ensureAuthenticated, (req, res, next) => {
+  app.get('/admin', tequilaStrategy.ensureAuthenticated, async (req, res, next) => {
     if (!_.includes(config.admin, req.user.email)) {
       next();
       return;
     }
 
-    const client = new services.SearchServiceClient('localhost:50051', grpc.credentials.createInsecure());
-    const request = new messages.Req();
-    request.setContent('test');
+    const lunch = await db.getMiam(setToNoon(moment(req.query.date || req.nextNoon)));
+    if (!lunch) {
+      return;
+    }
 
-    client.search(request, (err, response) => {
-      console.log('Greeting:', response.toObject().content);
+    const { joiners } = lunch;
+    const frequency = _.zipObject(joiners, await Promise.all(joiners.map(db.getMiamHistory)));
+    const users = await db.getUsers(joiners);
+    const settings = _.fromPairs(
+      users.map(u => [u.email, [u.lang === 'both' ? [true, true] : [u.lang === 'fr', u.lang === 'en']]])
+    );
 
-      res.locals.algo = {
-        v: 1,
-        value: req.user.email,
-      };
-      res.render('admin');
-    });
+    const payload = {
+      settings,
+      frequency,
+    };
+    const matching = await fetch(`http://${config.matcher}/match`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    }).then(x => x.json());
+
+    res.locals.algo = JSON.stringify(matching, null, 2);
+    res.render('admin');
   });
 
   app.get('/drink', tequilaStrategy.ensureAuthenticated, (req, res) => res.redirect('/'));

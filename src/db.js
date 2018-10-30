@@ -38,6 +38,18 @@ function injectOps(db: Object): Object {
       .write();
   };
 
+  db.getMiamHistory = async (email: string): Promise<Object> =>
+    db
+      .get('miams')
+      .values()
+      .map('assignments')
+      .flatten()
+      .filter({ users: [email] })
+      .map('users')
+      .flatten()
+      .countBy()
+      .value();
+
   db.getMiam = async (noon: Noon): Promise<Array<Object>> => db.get(['miams', noonToString(noon)]).value();
 
   db.updateMiam = async (noon: Noon, values: Object): Promise<void> => {
