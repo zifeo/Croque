@@ -6,7 +6,7 @@ const config = {
   port: 9000,
   raven: process.env.CROQUE_RAVEN,
   tz: 'Europe/Zurich',
-  admin: process.env.CROQUE_ADMIN.split(','),
+  admin: process.env.CROQUE_ADMIN ? process.env.CROQUE_ADMIN.split(',') : [],
   matcher: process.env.CROQUE_MATCHER,
   tequila: {
     tequila_host: 'tequila.epfl.ch',
