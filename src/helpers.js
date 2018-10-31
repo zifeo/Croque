@@ -4,7 +4,9 @@ import moment from 'moment-timezone';
 import seedrandom from 'seedrandom';
 import assert from 'assert';
 import _ from 'lodash';
+import fetch from 'node-fetch';
 import config from './config';
+import logger from './logger';
 import type { User } from './db';
 
 function setToNoon(date) {
@@ -160,4 +162,74 @@ function findGroups(users: Array<User>): Array<User> {
   return [groupsEn, groupsFr, cancelled];
 }
 
-export { setToNoon, computeTodayNoon, computeNextNoon, decompose345, findDecomposition, makeGroup, findGroups };
+function deadline(ms, promise) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error('timeout'));
+    }, ms);
+    promise.then(resolve, reject);
+  });
+}
+
+function request(method, url, payload, timeout = 10000) {
+  const req = fetch(`http://${config.matcher}/match`, {
+    method,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  return deadline(timeout, req.then(x => x.json()));
+}
+
+async function requestAssignments(db, noon, verbose = true) {
+  const lunch = await db.getMiam(noon);
+
+  if (!lunch) {
+    return null;
+  }
+
+  const { joiners } = lunch;
+
+  const frequency = _.zipObject(joiners, await Promise.all(joiners.map(j => db.getMiamHistory(j, joiners, noon))));
+  const users = await db.getUsers(joiners);
+  const conf = _.fromPairs(
+    users.map(u => [u.email, [u.lang === 'both' ? [true, true] : [u.lang === 'fr', u.lang === 'en']]])
+  );
+
+  let matching = null;
+  try {
+    matching = await request(
+      'POST',
+      `http://${config.matcher}/match`,
+      {
+        conf,
+        frequency,
+      },
+      5000
+    );
+  } catch (e) {
+    if (verbose) {
+      logger.error('cannot find assignment');
+    }
+  }
+
+  return {
+    users,
+    frequency,
+    matching,
+  };
+}
+
+export {
+  setToNoon,
+  computeTodayNoon,
+  computeNextNoon,
+  decompose345,
+  findDecomposition,
+  makeGroup,
+  findGroups,
+  request,
+  requestAssignments,
+};

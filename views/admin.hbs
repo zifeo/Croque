@@ -1,6 +1,27 @@
 
 <div class="app">
-    <pre>
-        {{ algo }}
-    </pre>
+    <ul>
+        {{#each assignments.users}}
+            <li>
+                {{email}}
+                <small>{{#each (lookup ../assignments.frequency email)}} <span title="{{@key}}">{{@this}}</span> {{/each}}</small>
+                <span class="pull-right">{{lookup @this 'lang'}}</span></li>
+        {{/each}}
+    </ul>
+    <br>
+    {{#if assignments.matching}}
+        <ul>
+        {{#each assignments.matching}}
+            <li>
+                <ul>
+            {{#each @this}}
+                <li>{{@this}}</li>
+            {{/each}}
+                </ul>
+            </li>
+        {{/each}}
+        </ul>
+    {{else}}
+        Matching error
+    {{/if}}
 </div>

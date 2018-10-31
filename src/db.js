@@ -38,15 +38,17 @@ function injectOps(db: Object): Object {
       .write();
   };
 
-  db.getMiamHistory = async (email: string): Promise<Object> =>
+  db.getMiamHistory = async (email: string, emails: Array<string>, until: Noon): Promise<Object> =>
     db
       .get('miams')
+      .pickBy((m, n) => n < noonToString(until))
       .values()
       .map('assignments')
       .flatten()
       .filter({ users: [email] })
       .map('users')
       .flatten()
+      .filter(u => emails.includes(u) && u !== email)
       .countBy()
       .value();
 

@@ -17,10 +17,9 @@ import Protocol from 'passport-tequila/lib/passport-tequila/protocol';
 import session from 'cookie-session';
 import moment from 'moment-timezone';
 import _ from 'lodash';
-import fetch from 'node-fetch';
 import Cron from 'cron';
 import logger from './logger';
-import { computeNextNoon, setToNoon } from './helpers';
+import { computeNextNoon, setToNoon, requestAssignments } from './helpers';
 import lowdbFactory from './db';
 import locations from './locations';
 import config from './config';
@@ -133,32 +132,10 @@ lowdbFactory().then(db => {
       return;
     }
 
-    const lunch = await db.getMiam(setToNoon(moment(req.query.date || req.nextNoon)));
-    if (!lunch) {
-      return;
-    }
+    const noon = req.query.date ? setToNoon(moment(req.query.date)) : req.nextNoon;
+    const assignments = await requestAssignments(db, noon, false);
 
-    const { joiners } = lunch;
-    const frequency = _.zipObject(joiners, await Promise.all(joiners.map(db.getMiamHistory)));
-    const users = await db.getUsers(joiners);
-    const settings = _.fromPairs(
-      users.map(u => [u.email, [u.lang === 'both' ? [true, true] : [u.lang === 'fr', u.lang === 'en']]])
-    );
-
-    const payload = {
-      settings,
-      frequency,
-    };
-    const matching = await fetch(`http://${config.matcher}/match`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    }).then(x => x.json());
-
-    res.locals.algo = JSON.stringify(matching, null, 2);
+    res.locals.assignments = assignments;
     res.render('admin');
   });
 
