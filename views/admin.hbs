@@ -1,5 +1,6 @@
 
 <div class="app">
+    Joiners:
     <ul>
         {{#each assignments.users}}
             <li>
@@ -9,19 +10,27 @@
         {{/each}}
     </ul>
     <br>
+    Assigned:
     {{#if assignments.matching}}
         <ul>
-        {{#each assignments.matching}}
-            <li>
-                <ul>
-            {{#each @this}}
-                <li>{{@this}}</li>
+            {{#each assignments.matching}}
+                <li>
+                    <ul>
+                        {{#each @this}}
+                            <li>{{@this}}</li>
+                        {{/each}}
+                    </ul>
+                </li>
             {{/each}}
-                </ul>
-            </li>
-        {{/each}}
         </ul>
     {{else}}
-        Matching error
+        no matching (result was "{{assignments.matching}}")
     {{/if}}
+    <br />
+    Cancelled:
+    <ul>
+        {{#each assignments.cancelled}}
+            <li>{{@this}}</li>
+        {{/each}}
+    </ul>
 </div>

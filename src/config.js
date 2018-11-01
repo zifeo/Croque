@@ -53,6 +53,13 @@ const config = {
         }
         return lang.data.root.user.lang;
       },
+      type(type: Object, options: ?Object) {
+        if (options) {
+          const { user } = options.data.root;
+          return user && user.type === type ? 'checked' : '';
+        }
+        return type.data.root.user.type;
+      },
     },
   },
 };

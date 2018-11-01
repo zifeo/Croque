@@ -152,6 +152,16 @@ lowdbFactory().then(db => {
     }
   });
 
+  app.get('/type/:type', tequilaStrategy.ensureAuthenticated, (req, res, next) => {
+    const { type } = req.params;
+    const { email } = req.user;
+    if (type !== 'staff' && type !== 'any') {
+      next();
+    } else {
+      db.updateUser(email, { type }).then(() => res.redirect('/'));
+    }
+  });
+
   app.get('/subscribe', tequilaStrategy.ensureAuthenticated, (req, res) => {
     const { email } = req.user;
     logger.info(`user subscribed: ${email}`);

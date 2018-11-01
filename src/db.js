@@ -31,6 +31,7 @@ function injectOps(db: Object): Object {
     return db
       .set(['users', email], {
         lang: 'both',
+        type: 'any',
         reminder: true,
         ...oldValues,
         ...values,

@@ -219,6 +219,7 @@ async function requestAssignments(db, noon, verbose = true) {
     users,
     frequency,
     matching,
+    cancelled: joiners.filter(j => !_.flatten(matching).includes(j))
   };
 }
 
