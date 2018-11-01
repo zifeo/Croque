@@ -197,8 +197,7 @@ async function requestAssignments(db, noon, verbose = true) {
   const conf = _.fromPairs(
     users.map(u => [
       u.email,
-      [u.lang === 'both' ? [true, true] : [u.lang === 'fr', u.lang === 'en']],
-      [u.type === 'staff', u.type !== 'staff'],
+      [u.lang === 'both' ? [true, true] : [u.lang === 'fr', u.lang === 'en'], [u.type === 'staff', u.type !== 'staff']],
     ])
   );
 
