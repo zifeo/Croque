@@ -6,7 +6,7 @@
             <li>
                 {{email}}
                 <small>{{#each (lookup ../assignments.frequency email)}} <span title="{{@key}}">{{@this}}</span> {{/each}}</small>
-                <span class="pull-right">{{lookup @this 'lang'}}, {{type}}</span></li>
+                <span class="pull-right">{{lookup @this 'lang'}}, {{lookup @this 'type'}}</span></li>
         {{/each}}
     </ul>
     <br>
