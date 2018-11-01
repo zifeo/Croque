@@ -198,7 +198,7 @@ async function requestAssignments(db, noon, verbose = true) {
     users.map(u => [
       u.email,
       [u.lang === 'both' ? [true, true] : [u.lang === 'fr', u.lang === 'en']],
-      [u.type === 'staff', u.type === 'any'],
+      [u.type === 'staff', u.type !== 'staff'],
     ])
   );
 
