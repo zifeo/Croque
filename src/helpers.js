@@ -195,7 +195,11 @@ async function requestAssignments(db, noon, verbose = true) {
   const frequency = _.zipObject(joiners, await Promise.all(joiners.map(j => db.getMiamHistory(j, joiners, noon))));
   const users = await db.getUsers(joiners);
   const conf = _.fromPairs(
-    users.map(u => [u.email, [u.lang === 'both' ? [true, true] : [u.lang === 'fr', u.lang === 'en']]])
+    users.map(u => [
+      u.email,
+      [u.lang === 'both' ? [true, true] : [u.lang === 'fr', u.lang === 'en']],
+      [u.type === 'staff', u.type === 'any'],
+    ])
   );
 
   let matching = null;
@@ -212,6 +216,7 @@ async function requestAssignments(db, noon, verbose = true) {
   } catch (e) {
     if (verbose) {
       logger.error('cannot find assignment');
+      throw e;
     }
   }
 
@@ -219,7 +224,25 @@ async function requestAssignments(db, noon, verbose = true) {
     users,
     frequency,
     matching,
-    cancelled: joiners.filter(j => !_.flatten(matching).includes(j))
+    cancelled: joiners.filter(j => !_.flatten(matching).includes(j)),
+  };
+}
+
+async function oldRequestAssignments(db, noon) {
+  const miam = await db.getMiam(noon);
+  if (!miam) {
+    return null;
+  }
+
+  const { joiners } = miam;
+  const users = await db.getUsers(joiners);
+  const [groupsEn, groupsFr, cancelled] = findGroups(users);
+
+  return {
+    users,
+    frequency: null,
+    matching: groupsEn.concat(groupsFr).map(g => g.map(u => u.email)),
+    cancelled: cancelled.map(u => u.email),
   };
 }
 
@@ -233,4 +256,5 @@ export {
   findGroups,
   request,
   requestAssignments,
+  oldRequestAssignments,
 };

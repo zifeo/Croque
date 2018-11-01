@@ -2,7 +2,7 @@
 
 import logger from './logger';
 
-import { computeTodayNoon, findGroups } from './helpers';
+import { computeTodayNoon, oldRequestAssignments, requestAssignments } from './helpers';
 import { happyEmail, sadEmail, reminderEmail } from './emails';
 import locations from './locations';
 
@@ -10,16 +10,18 @@ function lunchCron(db: Object, transporter: Object): Function {
   return async () => {
     logger.info('Lunch beat');
     const noon = computeTodayNoon();
-    const miam = await db.getMiam(noon);
-    if (!miam) {
-      return;
+
+    let matching = [];
+    let cancelled = [];
+
+    try {
+      ({ matching, cancelled } = await requestAssignments(db, noon));
+    } catch (e) {
+      logger.error(`unable to use new assignment using old ${e}`);
+      ({ matching, cancelled } = await oldRequestAssignments(db, noon));
     }
 
-    const { joiners } = miam;
-    const users = await db.getUsers(joiners);
-    const [groupsEn, groupsFr, usersCancelled] = findGroups(users);
-
-    const assignments = groupsEn.concat(groupsFr).map((group, i) => {
+    const assignments = (await Promise.all(matching.map(db.getUsers))).map((group, i) => {
       const location = locations[i % locations.length];
       logger.info(`assigning group ${i} at ${location.id} for ${group.map(u => `${u.email}:${u.lang}`)}`);
       for (const user of group) {
@@ -37,7 +39,7 @@ function lunchCron(db: Object, transporter: Object): Function {
       };
     });
 
-    const cancelled = usersCancelled.map(user => {
+    const cancellation = (await db.getUsers(cancelled)).map(user => {
       logger.warn(`cancelling ${user.email} (${user.lang})`);
       const message = {
         to: user.email,
@@ -50,7 +52,7 @@ function lunchCron(db: Object, transporter: Object): Function {
 
     await db.updateMiam(noon, {
       assignments,
-      cancelled,
+      cancelled: cancellation,
     });
   };
 }
