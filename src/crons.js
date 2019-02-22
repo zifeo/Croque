@@ -10,16 +10,19 @@ function lunchCron(db: Object, transporter: Object): Function {
   return async () => {
     logger.info('Lunch beat');
     const noon = computeTodayNoon();
-
-    let matching = [];
-    let cancelled = [];
+    let assign = null;
 
     try {
-      ({ matching, cancelled } = await requestAssignments(db, noon));
+      assign = await requestAssignments(db, noon);
     } catch (e) {
       logger.error(`unable to use new assignment using old ${e}`);
-      ({ matching, cancelled } = await oldRequestAssignments(db, noon));
+      assign = await oldRequestAssignments(db, noon);
     }
+    if (!assign) {
+      logger.info('no assign for no lunch');
+    }
+
+    const { matching, cancelled } = assign;
 
     const assignments = (await Promise.all(matching.map(db.getUsers))).map((group, i) => {
       const location = locations[i % locations.length];
