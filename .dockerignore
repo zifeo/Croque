@@ -1,4 +1,7 @@
 *
+!Gruntfile.js
+!package.json
+!yarn.lock
 !build
 !node_modules
 !db
